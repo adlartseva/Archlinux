@@ -1,0 +1,10 @@
+##############################
+## LightDM - менеджер входа ##
+##############################
+
+$ sudo nano /etc/lightdm/lightdm.conf  # сделаем авто-вход в систему
+
+			[Seat:*]
+			autologin-user=username
+			user-session=xfce
+   

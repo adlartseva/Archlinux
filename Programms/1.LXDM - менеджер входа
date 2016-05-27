@@ -1,0 +1,23 @@
+##########################
+## LXDM - менеджр входа ##
+##########################
+
+$ sudo pacman -S lxdm  # устанавливаем менеджер входа
+
+$ sudo sysemctl enable lxdm.service  # запускаем службу lxdm
+
+$ sudo nano /etc/lxdm/lxdm.conf  # сделаем авто-вход в систему
+
+     autologin=username  # прописываем имя пользователя
+     session=/usr/bin/startxfce4  # прописываем команду запуска окружения
+     numlock=1  # включаем numlock
+
+$ sudo pacman -S librsvg  # нужен для отображения фонов тем формата sv# 
+$ yaourt lxdm-themes  --темы для lxdm (ArchlinuxFull, ArchlinuxTop, Arch-Dark,Arch-Stripes, IndustrialArch)
+
+$ cp /usr/share/lxdm/themes ~/.config/lxdm/themes  # скопируем темы lxdm в домашний раздел.
+
+$ sudo nano /etc/lxdm/lxdm.conf  # изменим тему окна входа
+
+     theme=theme_name  # название темы
+

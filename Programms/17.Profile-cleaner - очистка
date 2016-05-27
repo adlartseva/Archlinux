@@ -1,0 +1,78 @@
+###############################
+## Profile-cleaner - очистка ##
+###############################
+
+$ yaourt profile-cleaner  # программа очистки кэша в браузер и sqlite базы данных
+
+$ profile-cleaner  # запускаем. добавляем букву, которая нужна:
+
+    с   --chromium               # браузер
+    
+    f   --firefox                # браузер
+    
+    gc  --google-chrome          # браузер
+    
+    o   --opera                  # браузер
+
+    ck  --conkeror               # программируемый браузер, основ. на Mozilla
+    
+    h   --heftig's aurora        # вроде как браузер (только в archlinux)
+    
+    i   --icecat                 # giu версия firefox браузера
+    
+    id  --icedove                # анонимный считыватель почты
+    
+    ix  --inox                   # Chromium spin-off для повышения конфид. путем 
+    откл. передачи данных в google
+    
+    m   --midori                 # браузер
+    
+    n   --newsbeuter             # читатель rss-канала
+    
+    pm  --palemoon               # браузер
+    
+    q   --qupZilla               # очень быстрый браузер
+    
+    s   --seamonkey              # новый браузер от Mozilla
+    
+    t   --thunderbird            # читатель почты
+    
+    to  --torbrowser             # анонимный браузер
+
+    p   --paths                  # ???
+
+##################
+## Profile Sync ##
+##################
+
+$ yaourt profile-sync-daemon  # скачиваем демона для prodile-cleaner
+
+$ psd p  # показывает что именно будет делать демон
+
+$ nano ~/.config/psd/.psd.conf  # редактируем конфиг демона
+ 
+   USE_OVERLAYFS="yes"  # для улучшения скорости синхронизации и уменьшить количество необходимой памяти (расскоментируем и вместо "no" напишем "yes")
+
+   BROWSERS="google-chrome,firefox,vivaldi"  # добавляем браузеры, которые хотите чистить от кэша
+
+$ systemctl --user enable psd.service  # добавляем службу в автозагрузку (без sudo) и запускаем её
+
+$ systemctl --user enable psd.resync.service  # добавляем службу в автозагрузку (без sudo) и запускаем её  
+
+$ mkdir ~/.config/systemd/user/psd-resync.timer.d/  # создаем каталог
+
+$ nano ~/.config/systemd/user/psd-resync.timer.d/frequency.conf  # создаем файл, для установки частоты синхронизации и добавляем:
+
+    [Unit]
+    Description=Timer for Profile-sync-daemon - 10min
+
+    [Timer]
+    # Empty value resets the list of timers
+    OnUnitActiveSec=
+    OnUnitActiveSec=10min
+
+$ systemctl --user restart psd.service  # перезагрузим службу (без sudo)
+
+$ systemctl --user restart psd.resync.service  # перзагрузим службу (без sudo)
+
+$ systemctl --user daemon-reload  # запустим демона

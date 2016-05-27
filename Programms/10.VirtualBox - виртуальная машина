@@ -1,0 +1,58 @@
+#####################################
+## VirtualBox - виртуальная машина ##
+#####################################
+
+$ sudo pacman -S virtualbox virtualbox-host-modules-arch virtualbox-guest-iso qt4  # устанавливаем виртуальную машину
+
+$ virtualbox-ck-host-modules  # устанавливать если стоит 
+кастомное ядро
+
+$ yaourt virtualbox-ext-oracle  # расширения для виртуальной машины
+
+$ sudo depmod -a  # проверяем какие загружены модули
+
+$ sudo modprobe vboxdrv  # загружаем модуль для виртуальной машины
+
+# echo vboxdrv > /etc/modules-load.d/virtualbox.conf  # добавляем модуль для старта при загрузки системы
+
+$ cat /etc/modules-load.d/virtualbox.conf  # проверяем
+
+$ sudo gpasswd -a username vboxusers  # добавляем пользователя в группу vboxusers
+
+########################################################################################################
+ 
+ Для синхронизации файлов с гостевой ОС на основную, создаем и ТАМ и ТАМ папку с именем vboxshare
+
+$ sudo modprobe vboxsf  # загружаем модуль
+
+$ sudo mount -t vboxsf -o rw,uid=1000,gid=1000 vboxshare vboxshare  # указываем папки и задаем им права
+
+#################
+## Гостевая ОС ##
+#################
+
+$ sudo pacman -S virtualbox-guest-dkms # для запуска иксов на виртуальнной машине (или linux-headers )
+
+$ sudo pacman -S virtualbox-guest-utils  # утилиты для гостевой ОС
+
+$ sudo systemctl enable vboxservice  # добавим службу в автозагрузку
+
+$ reboot  # перезагрузка
+
+$ sudo modprobe -a vboxguest vboxsf vboxvideo  # добавим модули в автозапуск
+
+$ sudo nano /etc/modules-load.d/virtualbox.conf  # добавим модули
+
+    vboxguest
+    vboxsf
+    vboxvideo
+
+$ sudo pacman -S xf86-video-nouveau  # установим драйвера на видеокарту (ati nouveau intel)
+
+$ sudo nano /etc/default/grub  # изменим расширение экрана
+
+    GRUB_GFXMODE="1024x768"
+
+###################################################
+## Выйти в X: Ctrl+Alt+Backspace или Ctrl+Alt+F2 ##
+###################################################    

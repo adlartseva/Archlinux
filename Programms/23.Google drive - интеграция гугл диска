@@ -1,0 +1,36 @@
+###########################################
+## Goggle drive - интеграция гугл диска ##
+###########################################
+
+$ sudo pacman -S gnome-control-center gnome-keyring gnome-contacts gnome-documents  # устанавливаем: контрольный центр гнома, менеджр паролей, контакты, документы.
+
+$ sudo pacman -S gvfs-goa gvfs-google  # дополнения для автомонтирования дисков
+
+$ nano ~/.local/share/applications/org.gnome.Documents.desktop  # создаем ярлык документов и пишем
+
+[Desktop Entry]
+Name=Documents
+Comment=Access, manage and share documents
+Exec=gnome-documents
+Icon=gnome-documents
+Terminal=false
+Type=Application
+StartupNotify=true
+DBusActivatable=true
+#OnlyShowIn=GNOME;
+Categories=GTK;Office;
+Keywords=Docs;PDF;Document;
+
+$ nano ~/.local/share/applications/online.desktop  # создаем ярлык онлайн аккаунтов и пишем
+
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Online Accounts
+Comment=Connect to online accounts
+Exec=gnome-control-center online-accounts
+Icon=goa-panel
+Terminal=false
+Type=Application
+Categories=GTK;Network;
+StartupNotify=false

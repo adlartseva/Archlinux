@@ -1,0 +1,13 @@
+########################
+## Bluetooth - блютуз ##
+########################
+
+$ sudo pacman -S bluez bluez-cups bluez-utils  # установим пакеты для блютуз
+
+$ sudo modprobe btusb  # добавим модуль в автозагрузку
+
+$ sudo systemctl enable bluetooth  # добавим службу в автозагрузку
+
+$ sudo systemctl start bluetooth  # запусти службу
+
+$ yaourt blueman  # установим блютуз менеджер

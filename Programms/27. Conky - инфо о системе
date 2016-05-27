@@ -1,0 +1,45 @@
+############################
+## Conky - инфо о системе ##
+############################
+## Настройка ##
+###############
+
+$ sudo pacman -S conky  # установим conky
+
+$ mkdir -p ~/.config/conky  # создаем папку для conky
+
+$ conky -C > ~/.config/conky/cony.conf  # скопируем конфиг
+
+$ nano ~/.config/conky/conky.conf  # редактируем конфиг так, как ваш нужно.
+
+$ sudo pacman -S conky-manager  # графичская оболочка для conky
+
+############
+## Скрипт ##
+############
+
+$ sudo pacman -S hddtemp lm_sensors  # утилиты для отслеживания тепературы
+
+$ yaourt conky-lua  # скаиваем пакет conky
+
+$ sudo systemctl enable hddtemp.service  # добавляем службу в автозагрузку
+
+$ sudo systemctl start hddtemp.service  # запускаем службу
+
+$ cp -r ~/Загрузки/.conky/ /home/kosha/  # скопируем каталог в домашнюю директорию
+
+$ $ cp -r ~/Загрузки/.Conky/ /home/kosha/  # скопируем каталог в домашнюю директорию
+
+$ cp -r ~/Загрузки/fonts/ ~/.local/share/  # скопируем каталог в домашнюю директорию
+
+$ cp ~/Загрузки/launch_conky.sh ~/.scripts/  # скопируем конфиг в папку .scripts
+
+$ cd ~/.scripts  # переходим в папку со скпиптами
+
+$ chmod u+x launch_conky.sh  # задаем права конфигу
+
+########################################
+добавляем launch_conky.sh в автозагрузку
+
+  Имя     conky
+  Команда ~/.scripts/launch_conky.sh

@@ -1,0 +1,17 @@
+#########################################
+## Hddparm - блокировка жесткого диска ##
+#########################################
+
+$ sudo pacman -S hdparm  # установим пакет для блокировки
+
+# hdparm -I /dev/sda  # выбираем жский диск (показывает инфо о жестком диске)
+
+# hdparm -I /dev/sda | cat > /home/username/sda_info.txt  # сохраняем инфо в файл
+
+# hdparm --user-master u--security-set-pass test /dev/sda  # блокируем жесткий диск и задаем пароль на нем (test - пароль)
+
+# hdparm --user-master u-security-erase test /dev/sda  # безопасное удаление
+
+# hdparm --user--master u-security-unlock "" /dev/sda  # снимаем пароль
+
+# hdparm --user-securiy-disable test /dev/sda  # снимаем блокировку с жеского диска

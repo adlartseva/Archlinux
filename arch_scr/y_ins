@@ -1,0 +1,10 @@
+#!/bin/bash
+sudo pacman -S fontconfig-infinality-ultimate firefox-i18n-ru firefox
+cd /etc/fonts/conf.d
+sudo ln -s ../conf.avail.infinality/36-repl-missing-glyphs.conf .
+sudo fc-presets set
+sudo fc-match "monospace"
+sudo fc-cache -fr
+yaourt -S nano-syntax-highlighting-git
+cat /usr/share/nano-syntax-highlighting/nanorc.sample | xargs -0 echo >> ~/.nanorc
+sudo ln -s /home/username/.nanorc /root/.nanorc

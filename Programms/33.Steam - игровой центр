@@ -1,0 +1,17 @@
+#############################
+## Steam - игровой центр ##
+#############################
+
+$ sudo pacman -S steam  # установим игровой центр
+
+$ yaourt steam-session-git  # для запуска "Big Picture" из менеджера дисплеев
+
+$ sudo nano /usr/share/xsessions/steam-big-picture.desktop  # создадим ярлык запуска "Big Picture" из менеджера дисплеев
+
+  [Desktop Entry]
+  Name=Steam Big Picture Mode
+  Comment=Start Steam in Big Picture Mode
+  Exec='/usr/bin/steam -bigpicture'
+  TryExec='/usr/bin/steam -bigpicture'
+  Icon=
+  Type=Application

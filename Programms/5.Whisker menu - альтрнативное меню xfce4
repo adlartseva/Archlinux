@@ -1,0 +1,43 @@
+###############################################
+## Whisker menu - альтернативное меню xfce4 ##
+###############################################
+
+$ sudo pacman -S xfce4-whiskermenu-plugin  # альтернативное меню для xfce
+
+$ nano ~/.gkrc-2.0  # покрасим меню. добавляем строки   
+ 
+		style "gtk-theme-config-panel" {
+			bg[NORMAL] = "#000000"
+			bg[PRELIGHT] = shade(1.1,"#000000")
+			bg[ACTIVE] = shade(0.9,"#000000")
+			bg[SELECTED] = shade(0.97,"#000000")
+			fg[NORMAL] = "#edd400"
+			fg[PRELIGHT] = "#edd400"
+			fg[SELECTED] = "#edd400"
+			fg[ACTIVE] = "#edd400"
+		}
+
+		style "whisker-menu-numix-dark-theme"  # добавляем абзац в конце
+		{
+		base[NORMAL] = "#2B2B2B"
+		base[ACTIVE] = "#D64937"
+		text[NORMAL] = "#ccc"
+		text[ACTIVE] = "#fff"
+		bg[NORMAL] = "#2B2B2B"
+		bg[ACTIVE] = "#D64937"
+		bg[PRELIGHT] = "#D64937"
+		fg[NORMAL] = "#ccc"
+		fg[ACTIVE] = "#fff"
+		fg[PRELIGHT] = "#fff"
+		}
+		widget "whiskermenu-window*" style "whisker-menu-numix-dark-theme"
+
+##################################################################
+
+$ yaourt mugshot  # программа для обновления инфо о пользователи
+
+$ sudo pacman -S accountsservice gstream0.10-good-plugins  # дополнительные утилиты, без которых mugshot не будет работать
+
+$ yaourt menulibre  # утилита для редактирования меню
+
+$ yaourt xame  # утилита для редактирования меню в xfce

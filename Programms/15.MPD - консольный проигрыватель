@@ -1,0 +1,67 @@
+####################################
+## MPD - консольный проигрыватель ##
+####################################
+
+$ sudo pacman -S mpd  # устанавливаем музыкальный проигрыватель (daemon)
+
+$ sudo pacman -S ncmpcpp  # устанавливаем клиент для mpd написанный на C++
+
+$ mkdir ~/.config/mpd  # создаем директорию для mpd
+
+$ nano ~/.config/mpd/mpd.conf  # создаем/рекактируем конфиг. Вставим текст
+
+    # Required files
+    db_file            "~/.config/mpd/database"
+    log_file           "~/.config/mpd/log"
+
+	# Optional
+	music_directory    "~/Музыка"
+	playlist_directory "~/.config/mpd/playlists"
+	pid_file           "~/.config/mpd/pid"
+	state_file         "~/.config/mpd/state"
+	sticker_file       "~/.config/mpd/sticker.sql"
+
+	audio_output {  
+	      type  "alsa"  
+	      name  "mpd alsamixer-output"
+	      mixer_type "software"
+	}
+
+	audio_output {  
+	type               "fifo"  
+	name               "toggle_visualizer"
+	path               "/tmp/mpd.fifo"
+	format             "44100:16:2"
+	}
+
+$ mkdir .config/mpd/playlists  # создаем директори	для плейлистов
+
+$ mpd  -# апускаем муз. плеер
+
+$ xfce4-session-settings  # добавим в автозапуск
+
+     Имя       MPD
+     Команда   mpd
+
+$ cd /usr/share/sounds/alsa  # переход в эту директорию и копируем звуки
+
+$ cp *.wav ~/Музыка/  # копируем звуки для теста
+
+$ music  # запускаем ncmpcpp (в .bashrc прописываем alias music)     
+
+#############
+## Клавиши ##
+#############
+
+s  # стоп
+
+enter  # воспроизвдение
+
+l  # случайный порядок
+
+p  # пауза
+
+/  # поиск
+
+q  # выход
+

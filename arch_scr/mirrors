@@ -1,0 +1,4 @@
+#!/bin/bash
+reflector -c 'Russia' -f 12 -l 12 -n 12 --verbose --save /etc/pacman.d/mirrorlist
+cat /etc/pacman.d/mirrorlist
+chmod +x /arch_ins/reboot_post

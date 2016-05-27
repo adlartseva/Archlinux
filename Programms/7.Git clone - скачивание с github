@@ -1,0 +1,33 @@
+###################################
+## Git clone - скачивание github ##
+###################################
+
+$ sudo pacman -S git  # утилита для скачивания с интернета (сайты, видео, github, ...)
+
+$ sudo pacman -S openssh  # средство подключения ssh
+
+$ git clone http://github.com/username/Blog  # команда для скачивания с github
+
+$ cp -r ~/.config ~/Blog  # копируем папку конфигов в репозиторий скачанный с github
+
+$ cd ~/Blog  --переходим в дикректорию Blog
+
+$ git config --global user.name "username"  # для синхронизации с github укажем наш логин
+
+$ git config --global user.email "your_email"  # и укажем адресс почты
+
+$ git config --global credential.helper cache  # включим помощника для кэша учетных данных
+
+$ git config --global credential.helper 'cache --timeout=3600'  # зададим таймаут для кэша
+
+$ git init  # создаем и инициализируем /.git
+
+$ git status  # смотрим статус репозитория (красный отмечены неотслеживаемые файлы/папки, которые нужно добавить в коммит)
+
+$ git add .config  # добавим папку и снова проверим статус
+
+$ git commit -a  # (~/Blog/.git/COMMIT_EDITMSG) чтобы зафиксировать изменения, допишем в конце файла:
+
+          Add new files/folders
+
+$ git push origin master  # задаем права репозиторию и отправляем файлы на github

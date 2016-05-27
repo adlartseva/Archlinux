@@ -1,0 +1,110 @@
+#################################
+## Thunar - файловый менеджер ##
+#################################
+
+$ xfce4-session-settings  # добавляем thunar в качестве демона в автозагрузку. Для более быстого запуска thunar
+
+      Имя  Thunar
+      Команда  thunar --daemon
+
+$ thunar  # открываем thunar и заходим: Правка -> Особые действия и добавляем
+
+           Имя                 Thunar root
+           Команда             gksu thunar %f
+           Условия появления   Каталоги
+
+           Имя                 Search
+           Команда             catfish %f
+           Условия появления   Каталоги, Текстовые файлы, Другие
+
+           Имя                 Показать меню Thunar
+           Команда             xdotool key ctrl+m
+           Условия появления   Каталоги
+
+           Имя                 Показать скрытые файлы
+           Команда             xdotool key ctrl+h
+           Условия появления   Каталоги
+
+           Имя                 Выделить по шаблону
+           Команда             xdotool key ctrl+s
+           Условия появления   Каталоги
+
+           Имя                 Терминал
+           Команда             exo-open --working-directory %f --launch TerminalEmulator
+           Условия появления   Каталоги
+
+           Имя                 Редактировать с парвами root
+           Команда             gksu leafpad %f
+           Условия появления   Текстовые файлы
+
+           Имя                 Значки
+           Команда             xdotool key ctrl+1
+           Условия появления   Каталоги
+
+           Имя                 Таблица    
+           Команда             xdotool key ctrl+2
+           Условия появления   Каталоги
+
+           Имя                 Список
+           Команда             xdotool key ctrl+3
+           Условия появления   Каталоги
+
+$ sudo pacman -S catfish  $ утилита для работы поиска 
+
+$ sudo pacman -S ffmpegthumbnailer  # экскизы видео в файловом менеджере 
+
+$ sudo pacman -S thunar-archive-plugin  # дополнение к архиватору     
+
+$ sudo pacman -S p7zip unrar zip unzip  # утилиты для извлечения .zip .rar и т.д.     
+
+############################################################################
+## $ ctrl+m  # такое сочетание клавиш, скрывает статус бар меню в thunar ###
+############################################################################
+## Особые действия в thunar ##
+###############################
+
+$ git clone https://github.com/cytopia/thunar-custom-actions.git  # скачаем скрипты. Далее создадим в домашней директории папку ".bin", куда будем складывать все скрипты. Копируем туда нужные нам скрипты и папку "icons".
+
+$ sudo pacman -S zenity gshellcheck awk curl  # отображ. диалог. окон и скриптов
+
+$ sudo pacman -S ffmpeg  # программа для записи и конвертирования видео
+
+$ sudo pacman -S gist xsel xclip  # лучшая компандная строка gist
+
+$ thunar  # открываем thunar и заходим: Правка -> Особые действия и добавляем
+
+             Имя                Конвертировать в png
+             Команда            /home/username/.bin/thunar-convert-to-png.sh -f %f
+             Значок             thunar-convert-to-png.png
+             Условия появления  Изображения
+
+             Имя                Конвертировать в jpg
+             Команда            /home/username/.bin/thunar-convert-to-jpg.sh -f %f
+             Значок             thunar-convert-to-jpg.png
+             Условия появления  Изображения
+
+             Имя                Медиа инфо
+             Команда            /home/username/.bin/thunar-media-info.sh -f %f -t %n
+             Значок             thunar-media-info.png
+             Условия появления  Аудио-файлы, видео-файлы
+
+             Имя                Преобразовать видео в gif
+             Команда            /home/username/.bin/thunar-video-to-gif.sh -f %f
+             Значок             Без иконки
+             Условия появления  Видео-файлы
+
+             Имя                Отправить в Imgur
+             Команда            /home/username/.bin/thunar-upload-to-imgur.sh -f %f
+             Значок             thunar-upload-to-imgur.png
+             Условия появления  Изображения
+
+
+$ sudo leafpad ~/.local/share/Thunar/sendto/dropbox_folder.desktop  # добавляем пункт в меню "отправить". пишем следущие
+
+   [Desktop Entry]
+   Type=Application
+   Version=1.0
+   Encoding=UTF-8
+   Exec=cp -r %f /home/username/Dropbox
+   Icon=/usr/share/icons/dropbox.png
+   Name=Dropbox

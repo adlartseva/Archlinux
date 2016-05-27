@@ -1,0 +1,22 @@
+###########################
+## Keyboard - клавиатура ##
+###########################
+
+$ xfce4-keyboard-settings  -# заходим в настройки клавиатуры и добавляем команды и горячие клавиши к ним
+
+  #################################################
+          Команда             | Комбинация клавиш
+  #################################################
+  xfce4-popup-whiskermenu          Super_R
+
+  xfce4-popup-whiskermenu          Super_L
+
+  xfce4-terminal --drop-down       Ctrl_R      # выпад.
+
+  thunar                           Ctrl+Alt+F
+
+  xfce4-screenshooter -f           Print           # снимок всего экран
+
+  xfce4-screenshooter -r           Shift_L+Print   # снимок выделенной области
+
+  xfce4-screenshooter -w           Ctrl_L+Print   # снимок активного окна

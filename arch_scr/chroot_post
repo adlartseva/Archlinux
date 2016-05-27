@@ -1,0 +1,13 @@
+#!/bin/bash
+
+hwclock --systohc --utc
+useradd -m -G wheel -s /bin/bash kosha
+passwd kosha
+echo sob2vain > /etc/hostname
+cat /etc/hostname
+EDITOR=nano visudo
+nano /etc/hosts
+mv arch_ins/bash_root /root/.bashrc
+mv arch_ins/.bashrc /home/kosha/
+chown kosha /home/kosha/.bashrc
+chmod +x /arch_ins/locale_ru

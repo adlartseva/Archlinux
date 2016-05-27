@@ -1,0 +1,122 @@
+# — Conky settings — #
+
+background yes
+
+update_interval 1
+total_run_times 0
+net_avg_samples 2
+
+override_utf8_locale yes
+
+double_buffer yes
+no_buffers no
+
+text_buffer_size 2048
+imlib_cache_size 0
+
+temperature_unit celsius
+
+# — Window specifications — #
+
+own_window_class Conky
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_argb_visual no
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+border_inner_margin 0
+border_outer_margin 0
+
+minimum_size 850 650
+maximum_width 850
+
+alignment top_left
+
+gap_x 1
+gap_y 1
+
+
+# — Graphics settings — #
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# — Text settings — #
+use_xft yes
+xftfont Ubuntu:size=7
+xftalpha 1.0
+
+default_color FFFFFF
+
+uppercase no
+use_spacer left
+
+color0 white
+color1 orange
+color2 green
+
+TEXT
+${voffset 20}${goto 50}${font Helvetica LT Std :size=14}${color FFFF00}${execpi 600 sed -n '1p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+${voffset 0}${goto 50}${font Helvetica LT Std :size=14}${color FFFF00}${execpi 600 sed -n '3p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+
+# Clock and Date
+${voffset 15}${goto 255}${font Helvetica LT Std :style=bold:size=16}${color 39FF14}${time %a},${time %e} ${time %b} ${time %Y}
+${voffset -35}${font Helvetica LT Std :style=Condensed:size=75}${color FFFFFF}${goto 32}${time %H}:${goto 150}${color FFFFFF}${time %M}${font Helvetica LT Std :style=Condensed:size=30}:${goto 258}${color FFFFFF}${time %S}
+
+# Sunrise and Sunset
+${voffset -95}${goto 310}${color FFFF00}${font Helvetica LT Std :size=12}Sunrise: ${execpi 600 sed -n '39p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+${goto 310}${color FFFF00}${font Helvetica LT Std :size=12}Sunset:  ${execpi 600 sed -n '40p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+
+#Image weather today
+${execi 500 bash $HOME/.Conky/htc_home/accuweather/accuw_script}
+${image $HOME/.Conky/htc_home/accuweather/cc.png -p 375,5 -s 450x275}
+
+# Temperature today with low and hight, Feel Like
+${voffset -30}${goto 40}${font Helvetica LT Std :size=60}${color FF7F00}${execpi 600 sed -n '29p' $HOME/.Conky/htc_home/accuweather/curr_cond}°
+${voffset -120}${goto 200}${font Helvetica LT Std :size=17}${color FFFFFF}H : ${color 39FF14}${goto 233}${execpi 600 sed -n '3p' $HOME/.Conky/htc_home/accuweather/first_days}°
+${voffset 0}${goto 200}${font Helvetica LT Std :size=17}${color FFFFFF}L : ${color 39FF14}${goto 233}${execpi 600 sed -n '4p' $HOME/.Conky/htc_home/accuweather/first_days}°
+${voffset 0}${goto 200}${color FFFFFF}${font Helvetica LT Std :size=17}FL: ${color 39FF14}${goto 233}${execpi 600 sed -n '30p' $HOME/.Conky/htc_home/accuweather/curr_cond}°
+
+# Weather today Wind Humidity...
+${voffset -102}${goto 285}${color FFFF00}${font Helvetica LT Std :size=14}${execpi 600 sed -n '28p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+${voffset 0}${goto 285}${color FFFFFF}${font Helvetica LT Std :size=13}Cloud: ${color 39FF14}${execpi 600 sed -n '36p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+${voffset 0}${goto 285}${color FFFFFF}${font Helvetica LT Std :size=13}Humidity: ${color 39FF14}${font Helvetica LT Std :size=11}${execpi 600 sed -n '33p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+${voffset 0}${goto 285}${color FFFFFF}${font Helvetica LT Std :size=13}Wind: ${color 39FF14}${font Helvetica LT Std :size=11}${execpi 600 sed -n '31p' $HOME/.Conky/htc_home/accuweather/curr_cond}-${execpi 600 sed -n '32p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+${voffset 0}${goto 285}${color FFFFFF}${font Helvetica LT Std :size=13}Pressure: ${color 39FF14}${font Helvetica LT Std :size=11}${execpi 600 sed -n '34p' $HOME/.Conky/htc_home/accuweather/curr_cond}
+
+# Weather 1 day of weekly
+${image $HOME/.Conky/htc_home/accuweather/6.png -p 5,323 -s 120x75}
+${voffset -20}${goto 40}${color FFFFFF}${font Helvetica LT Std :size=14}${execpi 600 sed -n '5p' $HOME/.Conky/htc_home/accuweather/first_days}
+${voffset 0}${goto 150}${color FFFF00}${font Helvetica LT Std :size=14}${execpi 600 sed -n '7p' $HOME/.Conky/htc_home/accuweather/first_days}
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}High: ${color FF0000}${goto 240}${execpi 600 sed -n '8p' $HOME/.Conky/htc_home/accuweather/first_days}°
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}Low: ${color 39FF14}${goto 240}${execpi 600 sed -n '9p' $HOME/.Conky/htc_home/accuweather/first_days}°
+
+# Weather 2 day of weekly
+${image $HOME/.Conky/htc_home/accuweather/11.png -p 5,458 -s 120x75}
+${voffset 15}${goto 40}${color FFFFFF}${font Helvetica LT Std :size=14}${execpi 600 sed -n '10p' $HOME/.Conky/htc_home/accuweather/first_days}
+${voffset 0}${goto 150}${color FFFF00}${font Helvetica LT Std :size=14}${execpi 600 sed -n '12p' $HOME/.Conky/htc_home/accuweather/first_days} 
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}High: ${color FF0000}${goto 240}${execpi 600 sed -n '13p' $HOME/.Conky/htc_home/accuweather/first_days}°
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}Low: ${color 39FF14}${goto 240}${execpi 600 sed -n '14p' $HOME/.Conky/htc_home/accuweather/first_days}°
+
+# Weather 3 day of weekly
+${image $HOME/.Conky/htc_home/accuweather/16.png -p 5,593 -s 120x75}
+${voffset 15}${goto 40}${color FFFFFF}${font Helvetica LT Std :size=14}${execpi 600 sed -n '15p' $HOME/.Conky/htc_home/accuweather/first_days}
+${voffset 0}${goto 150}${color FFFF00}${font Helvetica LT Std :size=14}${execpi 600 sed -n '17p' $HOME/.Conky/htc_home/accuweather/first_days}
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}High: ${color FF0000}${goto 240}${execpi 600 sed -n '18p' $HOME/.Conky/htc_home/accuweather/first_days}°
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}Low: ${color 39FF14}${goto 240}${execpi 600 sed -n '19p' $HOME/.Conky/htc_home/accuweather/first_days}°
+
+# Weather 4 day of weekly
+${image $HOME/.Conky/htc_home/accuweather/21.png -p 5,728 -s 120x75}
+${voffset 15}${goto 40}${color FFFFFF}${font Helvetica LT Std :size=14}${execpi 600 sed -n '20p' $HOME/.Conky/htc_home/accuweather/first_days}
+${voffset 0}${goto 150}${color FFFF00}${font Helvetica LT Std :size=14}${execpi 600 sed -n '22p' $HOME/.Conky/htc_home/accuweather/first_days}
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}High: ${color FF0000}${goto 240}${execpi 600 sed -n '23p' $HOME/.Conky/htc_home/accuweather/first_days}°
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}Low: ${color 39FF14}${goto 240}${execpi 600 sed -n '24p' $HOME/.Conky/htc_home/accuweather/first_days}°
+
+# Weather 5 day of weekly
+${image $HOME/.Conky/htc_home/accuweather/last_2.png -p 5,863 -s 120x75}
+${voffset 15}${goto 40}${color FFFFFF}${font Helvetica LT Std :size=14}${execpi 600 sed -n '1p' $HOME/.Conky/htc_home/accuweather/last_days}
+${voffset 0}${goto 150}${color FFFF00}${font Helvetica LT Std :size=14}${execpi 600 sed -n '3p' $HOME/.Conky/htc_home/accuweather/last_days}
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}High: ${color FF0000}${goto 240}${execpi 600 sed -n '4p' $HOME/.Conky/htc_home/accuweather/last_days}°
+${voffset 0}${goto 150}${color FFFFFF}${font Helvetica LT Std :size=14}Low: ${color 39FF14}${goto 240}${execpi 600 sed -n '5p' $HOME/.Conky/htc_home/accuweather/last_days}°

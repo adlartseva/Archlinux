@@ -1,0 +1,84 @@
+#############################
+## Wine - эмулятор windows ##
+#############################
+
+$ sudo pacman -S wine wine_gecko wine-mono winetricks  # установим эмулятор, поддержку Internet Explorer и .Net
+
+$ winecfg  # команда для настройки wine
+
+$ winetricks  # команда установки необходимых пакетов
+
+$ yaourt ttf-ms-fonts  # установим шрифты от microsoft
+
+###################################################
+## Установка .NET framework 4.0 и настройка wine ##
+###################################################
+
+$ sudo rm -r ~/.wine  # удалим каталог 
+
+$ WINEPREFIX=~/.games32 WINEARCH=win32 wine wineboot  # создаем 32-бит префикс
+
+$ WINEPREFIX=~/.games32 wine uninstaller  # это программа для удаления пакетов wine
+
+$ WiNEPREFIX=~/.games32 winecfg  # установим в папку
+
+$ WINEPREFIX=~/.games32 winetricks corefonts  # установим шрифты
+
+$ WINEPREFIX=~/.games32 winetricks msxml3  # установим файл
+
+$ WINEPREFIX=~/.games32 winetricks dotnet35  # установим net. fram.3.5
+
+$ WINEPREFIX=~/.games32 wineserver -k  # остановим падения
+
+$ WINEPREFIX=~/.games32 winetricks dotnet40  # установим net.fram.4.0
+
+$ WINEPREFIX=~/.games32 winetricks comctl32  # установим пакет
+
+$ WINEPREFIX=~/.games32 winetricks vcrun2005  # установим библиотеку
+
+#######################################################################
+## $ sudo rm -r ~/.wine  # удалим каталог (если что-то пошло не так) ##
+#######################################################################
+
+$ nano ~/.local/share/applications/wine/wine-browsedrive.desktop  # создадим пункт меню "Диск C"
+
+  [Desktop Entry]
+  Name=Диск C:
+  Comment=Запуск обозревателя в диске С:
+  Exec=wine winebrowser c:
+  Terminal=false
+  Type=Application
+  Icon=folder-wine
+  Categories=Wine;
+
+$ nano ~/.local/share/applications/wine/wine-uninstaller.desktop  # создадим пункт меню "Удаление приложений"
+
+  [Desktop Entry]
+  Name=Удаление приложений
+  Comment=Удаление приложений Windows, установленных в Wine
+  Exec=wine uninstaller
+  Terminal=false
+  Type=Application
+  Icon=wine-uninstaller
+  Categories=Wine;  
+
+$ nano ~/.local/share/applications/wine/wine-winecfg.desktop  # создадим пункт в меню "Настройка wine"
+
+  [Desktop Entry]
+  Name=Настройка Wine
+  Comment=Изменение настроек Wine и отдельных приложений
+  Exec=winecfg
+  Terminal=false
+  Icon=wine-winecfg
+  Type=Application
+  Categories=Wine;
+
+##########################################################
+## Создаем пункт в категорию "Wine" с помощью menulibre ##
+##########################################################
+
+$ sudo pacman -S playonlinux  # программа патчей для игр и программ
+
+$ yaourt crossover  # платная программа запуска windows программ и игр в linux (http://rutracker.org/forum/viewtopic.php?t=4923855)
+
+$ yaourt -S wine-wizard-git  # графический wine

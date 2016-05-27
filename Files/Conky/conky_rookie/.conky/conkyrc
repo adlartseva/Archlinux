@@ -1,0 +1,111 @@
+conky.config = {
+    background = true,
+
+    -- Windows
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_transparent = false,
+    own_window_type = 'desktop',
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_argb_visual = true,
+    own_window_argb_value = 0,
+    double_buffer = true,
+    no_buffers = true,
+    
+    -- Graphics
+    use_spacer = 'none',
+    use_xft = true,
+    font = 'DejaVu Sans Mono:size=12',
+    update_interval = 1.0,
+    uppercase = false,
+    stippled_borders = 0,
+    border_width = 1,
+    draw_borders = false,
+    draw_graph_borders = true,
+    draw_outline = false,
+    draw_shades = false,
+    show_graph_scale = false,
+    show_graph_range = false,
+    
+    -- Layout
+    alignment = 'top_right',
+    gap_x = 10,
+    gap_y = 15,
+    minimum_height = 250,
+    minimum_width = 250,
+    maximum_width = 270,
+    net_avg_samples = 1,
+    cpu_avg_samples = 6,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = false,
+    
+    -- Graphics Colors
+	default_color = 'FFFFFF',
+    default_outline_color = 'FFFFFF',
+    default_shade_color = 'FFFFFF',
+
+    --color0 00BFFF # DeepSkyBlue
+    --color1 FF7F00 # Orange
+    --color2 FF00FF # Fuchsia
+    --color3 FF0000 # Red
+    --color4 39FF14 # Neon green
+    --color5 FFFF00 # Yellow
+    --color6 0038A8 # Royal azure
+    --color7 FF00FF # Magenta
+    --color8 000000 # Black
+
+        -- Dareboy Lua
+    lua_load = '$HOME/.conky/Scripts/dareboy.lua',
+    lua_draw_hook_pre = 'widgets'
+
+}
+
+conky.text = [[
+
+
+#-- Info System
+${color FF7F00}${image $HOME/.conky/Icons/OS/archlinux.png -p 175,86 -s 65x65}${font}${goto 0}${voffset 20}${color FFFF00}${font Ubuntu:style=Bold:size=12} SYSTEM $hr 1
+${color FFFFFF}${voffset 5}${font Ubuntu:style=Bold:size=12}File System : ${goto 105}${color 39FF14}${fs_type}
+${color FFFFFF}${font Ubuntu:style=Bold:size=12}Host : ${goto 55}${color 39FF14}$nodename
+${color FFFFFF}${font Ubuntu:style=Bold:size=12}$sysname $kernel : ${goto 98}${color 39FF14}
+${color FFFFFF}${font Ubuntu:style=Bold:size=12}Uptime : ${goto 75}${color 39FF14}$uptime
+
+#-- Info Cpu Core And Info Cpu Usage
+${color 00BFFF}${image $HOME/.conky/Icons/Amd.png -p 0,171 -s 52x52}${font}${goto 60}${voffset 35}${color FFFFFF}${font Ubuntu:style=Bold:size=12} CPU ${color 39FF14}AMD 1090T
+${color FFFFFF}${font Ubuntu:style=Bold:size=10}${voffset 10}${goto 80}Cpu1: ${color FF7F00}${goto 117}${cpu cpu1}% ${goto 145}${color FFFFFF}Cpu3: ${color FF0000}${goto 182}${cpu cpu3}% ${goto 210}${color FFFFFF}Cpu5: ${color FF00FF}${goto 248}${cpu cpu5}%
+${color FFFFFF}${font Ubuntu:style=Bold:size=12}${voffset -10}${goto 0}Cpu ${color FFFF00}${goto 33}${cpu cpu0}% ${font Ubuntu:style=Bold:size=10}${voffset 10}${goto 80}${color FFFFFF}Cpu2: ${color FFFF00}${goto 117}${cpu cpu2}% ${goto 145}${color FFFFFF}Cpu4: ${color 39FF14}${goto 182}${cpu cpu4}% ${goto 210}${color FFFFFF}Cpu6: ${color 00BFFF}${goto 248}${cpu cpu6}%
+${color FFFFFF}${voffset 35}${goto 0}Temp: ${color FFFF00}${goto 40}${exec sensors k10temp-pci-00c3 | grep temp1 | cut -c16-20}${color FFFFFF}${goto 100}Cpu Fan:${goto 150}${color 39FF14}${exec sensors k10temp-pci-00c3 | grep 'fan1' | cut -c23-33}
+
+
+#-- Temperature
+${color FF0000}${image $HOME/.conky/Icons/thermometer.png -p 100,377 -s 55x55}${font}${goto 0}${voffset 10}${color FFFF00}${font Ubuntu:style=Bold:size=12}TEMPERATURE $hr 1
+${color FFFFFF}${voffset 5}${goto 0}${font Ubuntu:style=Bold:size=12} Sda1:${goto 50}${color 39FF14}${hddtemp /dev/sda}°C
+${color FFFFFF}${goto 0}${font Ubuntu:style=Bold:size=12} Sdb1:${goto 50}${color 39FF14}${hddtemp /dev/sdb}°C
+${color FFFFFF}${goto 0}${font Ubuntu:style=Bold:size=12} Sde1:${goto 50}${color 39FF14}${hddtemp /dev/sde}°C
+
+
+#-- Nvidia
+${color 39FF14}${image $HOME/.conky/Icons/GeForce.png -p 0,442 -s 50x50}${font}${goto 55}${voffset 10}${color FFFF00}${font Ubuntu:style=Bold:size=12} EVGA GTX 970 sc ${hr 1}${font}
+${color FFFFFF}${font Ubuntu:style=Bold:size=12}Gpu Temp:${goto 232}${color 39FF14}${execi 8 nvidia-settings -q "[gpu:0]/GPUCoreTemp" -t}°C
+${color FFFFFF}${font Ubuntu:style=Bold:size=12}Fan Speed:${goto 232}${color 39FF14}${execi 5 nvidia-settings -q [fan:0]/GPUCurrentFanSpeed -t} %
+${color FFFFFF}${font Ubuntu:style=Bold:size=12}Gpu Clock:${goto 205}${color 39FF14}${execi 60 nvidia-settings -q [gpu:0]/GPUCurrentClockFreqs | perl -ne 'print $1 if /GPUCurrentClockFreqs.*?: (\d+)./;'} MHz
+${color FFFFFF}${font Ubuntu:style=Bold:size=12}Mem Used:${goto 161}${color 39FF14}${execi 5 nvidia-settings -q [gpu:0]/UsedDedicatedGPUMemory -t} / ${exec nvidia-settings -q [gpu:0]/TotalDedicatedGPUMemory -t} MiB
+
+
+#-- Info Memory And Info Hard Drive
+${color FFFF00}${image $HOME/.conky/Icons/ram.png -p -2,575 -s 50x50}${font}${goto 51}${voffset 0}${color FFFFFF}${font Ubuntu:style=Bold:size=12}RAM${goto 95}${color FFFF00}$mem / $memmax = ${goto 240}${color 39FF14} $memperc%
+
+${color FFFF00}${image $HOME/.conky/Icons/ssd_drives.png -p 0,645 -s 50x50}${font}${goto 51}${voffset 35}${color FFFFFF}${font Ubuntu:style=Bold:size=12}DISK${goto 95}${color FFFF00}${fs_used /} / ${fs_size /} = ${goto 240}${color 39FF14}${fs_used_perc /}%
+
+
+
+#-- Info Ip Address And Info Networks
+${color FF0000}${image $HOME/.conky/Icons/Network/lan.png -p 0,727 -s 40x40}${font}${goto 45}${voffset -1}${color FFFFFF}${font Ubuntu:style=Bold:size=12} Network ${font sans-serif:normal:size=11}${goto 125}${color FFFF00}${addr wlp7s0}
+
+${color FFFF00}${image $HOME/.conky/Icons/download.png -p 0,780 -s 25x25}
+
+${color 00BFFF}${image $HOME/.conky/Icons/upload.png -p 0,835 -s 25x25}
+
+
+]]

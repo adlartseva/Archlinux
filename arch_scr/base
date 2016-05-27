@@ -1,0 +1,10 @@
+#!/bin/bash
+pacman -Syy
+pacman -S reflector
+cp -vf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+reflector -c 'Russia' -f 12 -l 12 -n 12 --verbose --save /etc/pacman.d/mirrorlist
+pacstrap /mnt base base-devel
+cp -r arch_xfce /mnt
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+arch-chroot /mnt

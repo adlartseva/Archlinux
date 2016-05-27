@@ -1,0 +1,23 @@
+########################################
+## Grub - стартовый загрузчик системы ##
+########################################
+
+$ yaourt grub2-theme  # таким образом ищем в aur
+
+$ yaourt grub2-theme-starfield-manjaro-menda  # тема для grub
+
+$ sudo cp -r /usr/share/grub/themes/starfield-manjaro-menda /boot/grub/themes  # скопируем нашу тему сюда
+
+$ sudo nano /etc/default/grub  # прописывает нашу тему в настройка
+
+   GRUB THEME="/boot/grub/themes/starfield-manjaro-menda/theme.txt"
+
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg  # обновляем grub
+
+$ reboot  # перезагрузка   
+
+$ sudo nano /etc/default/grub  # сократим время загрузки grub
+
+  GRUB_TIMEOUT=3  # вместо "10" ставим "3" секунды
+ 
+ $ sudo grub-mkconfig -o /boot/grub/grub.cfg  # обновляем grub

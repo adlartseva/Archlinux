@@ -1,0 +1,24 @@
+###############################
+## Blackarch - хак программы ##
+###############################
+
+$ curl -O https://blackarch.org/strap.sh  # скачаем скрипт для установки blackarch
+
+$ chmod +x strap.sh  # зададм ему права
+
+$ sudo ./strap.sh  # запустим его. Сгенерирует ключи и добавит репозитории
+
+#######################################################
+
+$ sudo nano /etc/pacman.conf  # или добавим репозиторий в pacman.conf
+
+  [blackarch]
+  SigLevel = Never
+  Server = http://blackarch.org/blackarch/$repo/os/$arch
+
+######################################################
+
+
+$ sudo pacman -S blackarch  # скачаем blackarch
+
+$ sudo reboot  # перезагрузка

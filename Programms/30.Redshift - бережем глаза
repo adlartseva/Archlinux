@@ -1,0 +1,15 @@
+##############################
+## Redshift - бережем глаза ##
+##############################
+
+$ sudo pacman -S redshift  # утилита для регулирования цветовой температуры экрана.
+
+$ sudo pacman -S python-gobject python-xdg librsvg  # установим дополнительные пакеты.
+
+$ mkdir -p ~/.config/systemd/user  # создаем папку для конфига
+
+$ cp /usr/lib/systemd/user/redshift-gtk.service ~/.config/systemd/user/  #копируем конфиг (сервис)
+
+$ systemctl --user enable redshift-gtk.service  # добавляем службу в автозагрузку
+
+$ sudo reboot  # перезагрузка

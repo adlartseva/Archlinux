@@ -1,0 +1,22 @@
+#################################################
+## Localepurge - удаление ненужных локализаций ##
+#################################################
+
+$ yaourt localepurge  # программа для удаления ненужных локалей
+
+$ sudo nano /etc/locale.nopurge  # добавим локали, которые хотим оставить
+
+    en
+    en_US
+    en_US.UTF-8 UTF-8
+    en_US ISO-8859-1
+    ru_RU
+    ru_RU.KOI8-R KOI8-R
+    ru_RU.UTF-8 UTF-8
+    ru_US ISO-8859-5
+
+    #NEEDSCONFIGFIRST  # закоментировать
+
+$ sudo /usr/bin/localepurge-config  # активируем конфиг    
+
+$ sudo localepurge  # удаляем излишки локалей    

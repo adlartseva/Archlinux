@@ -1,0 +1,179 @@
+################################
+## Archiso - создание live cd ##
+################################
+## Требования ##
+################
+
+1. Минимум 10GB свободной памяти
+2. Arch Linux 64x-бит
+3. Очистить pacman от кэш (sudo pacman -Scc)
+4. Отключить pamac
+
+###########################
+## Установка и настройка ##
+###########################
+
+$ sudo pacman -S archiso  # установим archiso для создания iso образов
+
+$ sudo nano /usr/bin/mkarchiso  # откроем и найдем "pacstrap" и припишем "-i", чтобы получились такие строчки
+
+  pacstrap -C "${pacman_conf}" -i -c -d -G -M "${work_dir}/airootfs" $* &> /dev/null
+
+  pacstrap -C "${pacman_conf}" -i -c -d -G -M "${work_dir}/airootfs" $*
+
+$ sudo mkdir livecd  # созданим рабочий каталог в домашней директории
+
+$ sudo cp -r /usr/share/archiso/configs/releng/* ~/livecd/  # скопируем профиль в рабочий каталог  
+
+$ cd livecd  # перейдем в рабочий каталог
+
+~/livecd $ sudo nano build.sh  # удаляем "i686" везде по файлу (удаляем упоминание 32-бит версий). Здесь же менем название нашего образа
+
+  iso_name=archkot
+  iso_label="ARCHKOT_$(date +%Y%m)"
+
+~/livecd $ sudo nano build.sh  # находим "dual" и заменяем его на "x86_64
+
+~/livecd $ sudo nano pacman.conf  # добавляем репозитории
+
+  [multilib]
+  Include = /etc/pacman.d/mirrorlist
+
+  [archlinuxfr]
+  SigLevel = Never
+  Server = http://repo.archlinux.fr/$arch
+
+~/livecd $ sudo nano pacman.conf  # расскоментируем и добавим
+
+    Color
+    ILoveCandy
+
+~/livecd $ sudo nano packages.both  # Удаляем ненужные пакеты
+
+   darkhttpd   # небольшой веб-сервер
+   crda        # домен-агент по регул. обл. беспр. сетей
+   elinks      # консольный браузер
+   gnu-netcat  #  
+   mc          # файловый менеджер
+   openssh     #
+   openvpn     #
+   linux-atm   # драйвер atm
+   grml-zsh-config   # 
+
+~/livecd $ sudo nano build.sh  # находим "zsh" и удаляем   
+
+~/livecd $ sudo nano airootfs/root/customize_airootfs.sh  # заменем "zsh" на "bash"
+
+~/livecd $ sudo nano mkinitcpio.conf  # удалем строчку
+
+  archiso_pxe_common archiso_pxe_nbd archiso_pxe_http archiso_pxe_nfs
+
+~/livecd $ sudo nano packages.both  # добавляем из файла packages названия пактов
+
+~/livecd $ sudo mkdir airootfs/etc/skel  # создаем каталог
+
+~/livecd $ sudo nano airootfs/etc/skel/.bash_profile  # создаем файл и вставляем текст из файла bash_profile
+
+~/livecd $ sudo nano /airootfs/etc/skel/.xsession  # создаем файл и вставляем текст из файла xssession
+
+~/livecd $ sudo nano /airootfs/etc/skel/.xinitrc  # создаем файл и вставляем текст из файла xinitrc
+
+~/livecd $ sudo cp ~/.bashrc airootfs/etc/skel  # скопируем наш bashrc в livecd
+
+~/livecd $ sudo nano airootfs/root/customize_airootfs.sh  # добавляем пользователя
+
+  useradd -m -p "" -g users -G "adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel" -s /bin/bash kosha
+  #chmod 700 /root
+  chown -R kosha:users /home/kosha
+
+~/livecd $ sudo nano airootfs/root/customize_airootfs.sh  # вкючаем службу networkmanager
+
+   systemctl enable pacman-init.service choose-mirror.service NetworkManager.service
+
+~/livecd $ sudo mkdir airootfs/etc/skel/.config  # создадим файл конфига
+
+~/livecd $ sudo mkdir airootfs/etc/skel/.local  # создадим файл
+
+~/livecd $ sudo nano airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf  # меняем "root" на "kosha"
+
+~/livecd $ sudo mkdir airootfs/etc/sudoers.d  # создаем нужную директорию
+
+~/livecd $ sudo nano airootfs/etc/sudoers.d/g_wheel  # убираем запрос пароля для пользователя
+
+  %wheel  ALL=(ALL) NOPASSWD: ALL
+
+~/livecd $ sudo mkdir airootfs/etc/skel/.config/leafpad  # создаем директорию
+
+~/livecd $ sudo nano airootfs/etc/skel/.config/leafpad/leafpadrc  # скопируем текст из файл leafpadrc
+
+~/livecd $ sudo ./build.sh -v  # компилируем образ системы 
+
+#########################################################
+
+В vitrualbox запускаем образ и перед тем, как нажать "Boot Arch Linux (x86_64)" дописываем
+
+   cow_spacesize=2G
+
+Таким образом имеем возможность сохранть наши действия   
+
+#########################################################
+
+Если ошибки или что-то пошло не так:
+
+~/livecd $ sudo rm -rf work/ out/  # удалем рабочий каталог (отн. к образу)
+
+##################
+## В virtualbox ##
+##################
+
+$ sudo pacman -S linux-headers  # ядро
+
+$ sudo modprope vboxsf  # добавляем модуль
+
+$ dconf dump / > dump.dconf  # сохраняет в файл в домашней директории, все действия пользователя
+
+#############################################
+
+~/livecd $ sudo mkdir airootfs/etc/skel/.config/autostart  # создаем директорию для автозапуска
+
+~/livecd $ sudo nano airootfs/etc/skel/.config/autosart/koshatheme.desktop  # создаем ярлык запуска и впишем текст из файла koshatheme
+
+~/livecd $ sudo mkdir -p airootfs/usr/bin  # создаем директорию
+
+~/livecd $ sudo nano airootfs/usr/bin/koshatheme  # пишем скрипт
+
+   #!/bin/bash
+   cd /usr/bin
+   dconf load / < dump.dconf 
+
+~/livecd $ sudo chmod +x airootfs/usr/bin/koshatheme  # задаем права
+
+~/livecd $ sudo cp ~/dump.dconf airootfs/usr/bin/  # скопируем содержимое нашего файла
+
+~/livecd $ sudo cp -r abif-master/ ~/livecd/airootfs/  # копируем установщик
+
+~/levecd $ sudo nano airootfs/abif-master/abif  # редактируем. Пишем: имя образа, пользователя
+
+~/livecd $ sudo chmod +x airootfs/abif-master/abif  # задаем права 
+
+~/livecd $ sudo rm -rf work/ out/  # удалем рабочий каталог
+
+~/livecd $ sudo ./build.sh -v  # компилируем образ системы 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

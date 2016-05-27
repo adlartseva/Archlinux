@@ -1,0 +1,49 @@
+##################################
+## Reflector - настройка зеркал ##
+##################################
+
+$ sudo pacman -S reflector rsync  # установим рефлектор и доп. утилиту для рефлектора
+
+# cp -vf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup  # сделаем бэкап зеркал
+
+# reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist  # эта команда отсортирует 200 зеркал по скорости загрузки и обновит mirrorlist
+
+# reflector -c 'Russia' -f 12 -l 12 -n 12 --verbose --save /etc/pacman.d/mirrorlist  # отсортирует зеркала по скорости и обновит mirrorlist для России
+
+# nano /etc/systemd/system/reflector.service  # добавим записи в файлик, для обновления зеркал при каждом запуске системы
+
+            [Unit]
+			Description=Pacman mirrorlist update
+			Requires=network-online.target
+			After=network-online.target
+
+			[Service]
+			Type=oneshot
+			ExecStart=/usr/bin/reflector --protocol http --latest 30 --number 20 --sort rate --save /etc/pacman.d/mirrorlist
+
+			[Install]
+			RequiredBy=multi-user.target
+
+# systemctl enable reflector.service  # добавим службу в автозагрузку
+
+# systemctl start reflector.service  # запустим службу
+
+########################################
+
+# nano /etc/systemd/system/reflector.timer  # можно запускать службу рефлектора раз в неделю, вместо ежедневно. Отредактируем файлик
+
+					[Unit]
+					Description=Run reflector weekly
+
+					[Timer]
+					OnCalendar=weekly
+					RandomizedDelaySec=12h
+					Persistent=true
+
+					[Install]
+					WantedBy=timers.target
+
+
+# systemctl enable reflector.timer  # добавим службу в автозагрузку
+
+# systemctl start reflector.timer  # запустим службу

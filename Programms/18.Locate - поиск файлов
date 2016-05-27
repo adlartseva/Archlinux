@@ -1,0 +1,30 @@
+###########################
+## Locate - поиск файлов ##
+###########################
+
+$ sudo pacman -S mlocate  # поисковик файлов на системе
+
+$ locate xinitrc  # выполнит поиск по всей файловой систем. Поиск ведется по базе данных, а не по самой файловой системе. Обновление базы данных выполняется автоматически каждое утро. Примерный вывод файов в терминале:
+
+/etc/X11/xinit/xinitrc
+/etc/X11/xinit/xinitrc.d
+/etc/X11/xinit/xinitrc.d/40-libcanberra-gtk-module.sh
+/etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+/etc/xdg/xfce4/xinitrc
+/home/kosha/livecd/airootfs/etc/skel/.xinitrc
+/home/kosha/livecd/work/x86_64/airootfs/etc/X11/xinit/xinitrc
+/home/kosha/livecd/work/x86_64/airootfs/etc/X11/xinit/xinitrc.d
+/home/kosha/livecd/work/x86_64/airootfs/etc/X11/xinit/xinitrc.d/40-libcanberra-gtk-module.sh
+/home/kosha/livecd/work/x86_64/airootfs/etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+/home/kosha/livecd/work/x86_64/airootfs/etc/xdg/xfce4/xinitrc
+/home/kosha/Документы/Создание livecd/xinitrc
+/timeshift/snapshots/.sync/localhost/etc/X11/xinit/xinitrc
+/timeshift/snapshots/.sync/localhost/etc/X11/xinit/xinitrc.d
+/timeshift/snapshots/.sync/localhost/etc/X11/xinit/xinitrc.d/40-libcanberra-gtk-module.sh
+/timeshift/snapshots/.sync/localhost/etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+/timeshift/snapshots/.sync/localhost/etc/xdg/xfce4/xinitrc
+/timeshift/snapshots/2016-05-09_17-53-05/localhost/etc/X11/xinit/xinitrc
+/timeshift/snapshots/2016-05-09_17-53-05/localhost/etc/X11/xinit/xinitrc.d
+/timeshift/snapshots/2016-05-09_17-53-05/localhost/etc/X11/xinit/xinitrc.d/40-libcanberra-gtk-module.sh
+/timeshift/snapshots/2016-05-09_17-53-05/localhost/etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+/timeshift/snapshots/2016-05-09_17-53-05/localhost/etc/xdg/xfce4/xinitrc

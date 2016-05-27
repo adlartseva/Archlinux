@@ -1,0 +1,15 @@
+################################################
+## Системный монитор Mate - диспетчер задач ##
+################################################
+
+$ sudo pacman -S mate-system-monitor  # установим системный монитор
+
+$ cp /usr/share/applications/mate-system-monitor.desktop ~/.local/share/applications/  # скопируем системный монитор в домашнюю директорию
+
+$ nano ~/.local/share/applications/mate-system-monitor.desktop  # удалим в этом файле следущие строки
+
+         OnlyShowIn=MATE;
+         X-MATE-Bugzilla-Bugzilla=MATE
+         X-MATE-Bugzilla-Product=system-monitor
+         X-MATE-Bugzilla-Component=general          X-MATE-Bugzilla-Version=1.12.1
+         Keywords=MATE;

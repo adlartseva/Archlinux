@@ -1,0 +1,26 @@
+###############################
+## Wego - погода в терминале ##
+###############################
+
+$ yaourt wego-git  # погода в терминале
+
+$ wego  # команда запуска
+
+######################################
+## Здесь логинимся и берем API key  ##
+## https://developer.forecast.io/   ##
+######################################
+
+$ nano ~/.wegorc  # вписываем 
+
+  forecast-api-key=efc6e7e70bfe8b2ca13daff6af07664e
+  
+  forecast-lang=ru
+  
+  wwo-lang=ru
+  
+  #location=37.8267,-122.423
+  
+  locatioт=47.24,39.71
+  
+  wwo-api-key=efc6e7e70bfe8b2ca13daff6af07664e

@@ -1,0 +1,17 @@
+###############################
+## Yandex-disk - яндекс диск ##
+###############################
+
+$ yaourt yandex-disk  # установим яндекс диск
+
+$ yandex-disk setup  # настроем яндекс диск
+
+$ systemctl --user enable yandex-disk.service  # добавим в автозагрузку
+
+$ yandex-disk start  # старт яндекс диска
+
+$ yandex-disk stop  # стоп яндекс диска
+
+$ yandex-disk sync  # синхронизация яндекс диска
+
+$ yandex-disk status  # статус яндекс диска

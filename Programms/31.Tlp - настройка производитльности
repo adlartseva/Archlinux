@@ -1,0 +1,39 @@
+#######################################
+## Tlp -настройка производительности ##
+#######################################
+
+$ sudo pacman -S tlp  # утилита поможет настроить максимальную производительность для ПК и ноутбуков, а для последних добавит возможность перейти на энергосберегающий режим при питании от батареи
+
+$ sudo systemctl disable systemd-rfkill.service  #отключаем службу по умолчанию
+
+$ sudo systemctl enable tlp.service  # добавляем службу в автозагрузку
+
+$ sudo systemctl enable tlp-sleep.service   # добавляем службу в автозагрузку
+
+$ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors  # проверяем, доступные CPU регуляторы
+
+$ sudo nano /etc/default/tlp  # настроим конфиг tlp. расскоментируем и немного изменим
+
+  TLP_ENABLE=1
+
+  CPU_SCALING_GOVERNOR_ON_AC=perfomance  # заменить на свои
+  CPU_SCALING_GOVERNOR_ON_BAT=powersave  # заменить на свои
+
+  CPU_MIN_PERF_ON_AC=50
+  CPU_MAX_PERF_ON_AC=100
+  CPU_MIN_PERF_ON_BAT=0
+  CPU_MAX_PERF_ON_BAT=30
+
+  CPU_BOOST_ON_AC=1
+  CPU_BOOST_ON_BAT=0
+
+  DISK_APM_LEVEL_ON_AC="255 255"
+  DISK_APM_LEVEL_ON_BAT="192 192"
+
+  RESTORE_DEVICE_STATE_ON_STARTUP=1  # с помощью данного параметра, вы можете восстановить состояние беспроводных сетей, с предыдущей сессии
+
+$ sudo tlp start  # запустить не перезагружая систему
+
+$ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor  # проверить его работу
+
+$ sudo tlp-stat  # полный вывод утилиты, включая отчет по всем устройствам
