@@ -1,0 +1,28 @@
+###################################
+## Темы, иконки и украшательства ##
+###################################
+
+$ sudo pacman -S numix-themes  # тема numix
+
+$ yaourt numix-circle-icon-theme-git menda-maia-icon-theme vertex-icons-git papirus-icons-git  # иконки
+
+$ yaourt vertex-themes gtk-theme-arc-git adapta-gtk-theme  # темы
+
+$ yaourt xcursor-menda-git xcursor-maia  # курсоры
+
+$ yaourt ubuntu-wallpapers  # обои из ubuntu
+
+#######################################
+## Скачать от manjaro можно с github ##  
+## https://github.com/manjaro        ##    
+#######################################
+
+$ sudo nano /usr/share/themes  # здесь хранятся темы
+
+$ mkdir ~/.icons  # создаем папку в домашней директори
+
+$ sudo nano /usr/share/icons  # здесь хранятся иконки и курсоры
+
+$ yaourt gtk-theme-config  # утилита позволяет изменять цвета в темах
+
+$ sudo nano /usr/share/backgrounds/xfce  # здесь хранятся обои

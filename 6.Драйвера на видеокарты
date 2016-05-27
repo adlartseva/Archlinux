@@ -1,0 +1,137 @@
+############################
+## Драйвера на видеокарты ##
+############################
+## Catalyst ##
+#################################
+## AMD Radeon HD 7310 Graphics ##
+#################################
+
+$ sudo nano /etc/pacman.conf  # добавляем репозитории для драйвера catalyst
+
+[xorg116]
+SigLevel = Never
+Sever = http://catalyst.wirephire.com/repo/xorg116/$arch
+
+[catalyst]
+SigLevel = Never
+Server = http://catalyst.wirephire.com/repo/catalyst/$arch
+
+$ sudo pacman -Syyuu  # синхронизация и обновление базы данных
+
+$ sudo pacman -Rcc lib32-ati-dri ati-dri xf86-video-ati  # удаляем свободный драйвер
+
+$ sudo pacman -S catalyst-hook catalyst-libgl catalyst-utils  # устанавливаем драйвера на видеокарту
+
+$ sudo pacman -S opencl-catalyst lib32-catalyst-utils lib32-catalyst-libgl lib32-opencl-catalyst  # установим дополнительные компоненты. Необязательно, но необходимо для игр
+
+## !!!НЕ перезагружать!!! ##
+
+$ sudo systemctl enable atieventsd  # добавим службу в автозагрузку
+
+$ sudo systemctl start atieventsd  # запустим службу
+
+$ sudo systemctl enable catalyst-hook  # добавим службу в автозагрузку
+
+$ sudo systemctl start catalyst-hook  # запустим службу 
+
+$ sudo systemctl enable temp-links-catalyst  # добавим службу в автозагрузку
+
+$ sudo systemctl start temp-links-catalyst  # запустим службу
+
+$ sudo aticonfig --initial  # сконфигурируем иксы (для одного монитора)
+
+$ sudo nano /etc/modprobe.d/modprobe.conf  # добавим строчку в черный список
+
+blacklist radeon
+
+$ sudo nano /etc/default/grub.cfg  # добавим строчку
+
+GRUB_CMDLINE_LINUX="nomodeset"
+
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg  # обновим grub
+
+$ sudo reboot  # перезагрузка
+
+$ yaourt amdoverdrivectrl  # утилитка, настройка и разгон видеокарты
+
+##############################
+## Настройка AMD видеокарты ##
+##############################
+
+####################################################################  
+##  Сглаживание -> выкл                                           ##
+##  Режим сглаживания -> производительность                       ##
+##  Антизотропная фильтрация -> выкл                              ##
+##  Детализация Множественных Отображений -> производительность   ##
+##  Ждать вертикального обновлния -> производительность           ##
+####################################################################
+
+############
+## Nvidia ##
+###########################
+## Nvidia GEFORSE GT 640 ##  
+###########################
+
+$ sudo pacman -S nvidia nvidia-libgl  # устанавливаем драйвера на видеокарту nvidia. (на мою) Когда попросит удалить mesa-libgl соглашаемся
+
+$ sudo pacman -S nvidia-340xx nvidia-340xx-libgl  # устанавливаем драйвера на видеокарту nvidia. (Для Дэна) 
+Когда попросит удалить mesa-libgl соглашаемся
+
+$ sudo reboot  # перезагрузка
+
+$ sudo pacman -S lib32-nvidia-utils lib32-nvidia-libgl lib32-mesa-demos libva-vdpau-driver  # устанавливаем 32-бит библиотеки (Для меня)
+
+$ sudo pacman -S lib32-nvidia-340xx-utils lib32-nvidia-340xx-libgl lib32-mesa-demos libva-vdpau-driver  # устанавливаем 32-бит библиотеки (Для Дэна)
+
+$ sudo pacman -S nvidia-settings  # настройки для видеокарты
+
+$ sudo systemctl enable nvidia-persistenced.service  # добавляем службу в автозагрузку
+
+$ sudo reboot  # перезагрузка
+
+$ glxinfo32 | grep OpenGL  # проверяем opengl
+
+$ vainfo  # смотрим информацию
+
+$ sudo pacman -S nvdock  # установим значек в трей для Nvidia settings и добавим в автозагрузку
+
+    Имя  Nvidia Dock
+    Команда  nvdock
+
+$ sudo nvidia-xconfig --cool-bits=4  # ускорим видеокарту
+
+$ sudo reboot  # перезагрузка
+
+###################################################################################################################################
+## Открываем menulibre -> other -> nvidia X Server Settings -> Categories и удалем предложенную и добавим в категорию "system"   ##
+## В строчке "Команды" пишем "sudo /usr/bin/nvidia-settings"                                                                     ##
+## Открываем Nvidia Settings -> Thermal Settings -> Enable GPU Fan Settings (ставим галочку) и выставим 20%                      ##
+## Конфигурация Nvidia Settings -> Show "Realy Quit" Dialog (снимаем галочку)                                                    ##
+###################################################################################################################################
+
+$ yaourt gputest  # Тестирование GPU
+
+$ gputest /test=fur /width=1280 /hight=1024 /fullscreen  # запустим и проверим
+
+$ gputest /test=fur /width=1920 /hight=1080 /fullscreen /benckmark  # запустим и проверим
+
+$ sudo pacman -S libxnvctrl  # сенсор nvidia для отображения в виджете на панели xfce 
+
+#################################
+## Настройка Nvidia видеокарты ##
+#################################
+
+######################################################################
+##   Антизотропная фильтрация -> выкл.                              ##
+##   Вертикальная синхронизация (V-Sync) -> выкл.                   ##
+##   Включить масштабируемые текструры -> нет                       ##
+##   Огриничение расширения -> выкл.                                ##
+##   Сглаживание -> выкл.                                           ##
+##   Тройная буферизация -> выкл.                                   ##
+##   Фильтрация текстур (антизотропная оптимизация) -> вкл.         ##
+##   Фильтрация текстур (качество) -> наивысшая производительность  ##
+##   Фильтрация текстур (отрицательное отклонение УД) -> вкл.       ##
+##   Фильтрация текстур (три-линейная оптимизация) -> вкл.          ##
+######################################################################
+
+$ gputest /test=fur /width=1280 /hight=1024 /fullscreen  --запустим и проверим

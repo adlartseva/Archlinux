@@ -1,0 +1,22 @@
+################
+## NTFS диски ##
+################
+
+$ sudo pacman -S gvfs  # автомонтирование дисков (разделов,дисков,флэшек), после перезагрузить
+
+$ sudo pacman -S ntfs-3g  # утилита для отображения дисков (разделов) с ntfs
+
+$ sudo pacman -S gamin  # утилита для мониторинга системы
+
+$ sudo pacman -S dosfstools  # dos утилиты
+
+# cd /usr/share/polkit-1/rules.d  # перейдем в эту директорию
+
+# nano 10-enable-mount.rules  # вставим в файлик следущие строки (чтобы не запрашивал пароль)
+
+		polkit.addRule(function(action, subject) {
+		if (action.id.indexOf("org.freedesktop.udisks2.") == 0){ 
+		       return polkit.Result.YES;
+		   }
+		}
+		);

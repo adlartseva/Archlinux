@@ -1,0 +1,43 @@
+##################
+## Полезняшки ##
+##################
+## Folders ##
+#############
+
+$ sudo pacman -S xdg-user-dirs  #утилита для автосоздания пользовательских папок
+
+$ xdg-user-dirs-update  # команда создание папок
+
+###########
+## Софт ##
+###########
+
+$ sudo pacman -S meld  # программа для сравнения файлов (кода). Таких как .conf.pacnew
+
+$ yaourt pamac-aur  # графический интерфейс: pacman, yaourt, aur 
+
+$ yaourt pacaur  # аналог yaourt и pamac
+
+$ sudo pacman -S guvcview  # утитила для настройки cheese 
+
+$ yaourt bmenu  # просто системное меню для командной строки
+
+$ sudo pacman -S bc  # консольный калькулятор
+
+$ sudo pacman -S htop  # интерактивный просмотр процессов в терминале
+
+$ yaourt systemd-manager-git  # программа показывает запущенные/не запущенные service, timer,socket
+
+#########################
+## Запись с вебки себя ##
+#########################
+
+$ sudo pacman -S mplayer  # установим медиа плеер (vebnout.sh - с камеры ноутбука, vebpcdev.sh - со сторонней вебки)
+
+##############
+## Android ##
+##############
+
+$ yaourt libmtp  # установим протокол передачи mtp
+
+$ sudo pacman -S gvfs gvfs-mtp gvfs-gphoto2  # для подключения android (внутренний накопитель + sdcard) (перезагрузиться)

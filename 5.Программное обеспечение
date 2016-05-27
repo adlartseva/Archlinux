@@ -1,0 +1,148 @@
+##############################
+## Программное обеспечение ##
+##############################
+
+################
+## Браузеры ##
+################
+
+$ sudo pacman -S firefox  # браузер
+
+$ yaourt google-chrome # браузер
+
+$ yaourt -S vivaldi vivaldi-ffmpeg-codecs chromium-pepper-flash  # браузер, кодеки для воспроизведения видео и флэш плеер
+
+##############
+## Графика ##
+##############
+
+$ sudo pacman -S shotwell  # программа для организации фото
+
+$ sudo pacman -S ristretto  # просмоторщик изображений
+
+$ sudo pacman -S pinta  # аналог Paint.NET
+
+$ sudo pacman -S gimp  # аналог Photoshop (более новая версия в AUR: gimp-git)
+
+$ sudo pacman -S inkscape  # программа для редактирования векторной графики
+
+$ sudo pacman -S variety  # авто смена обоев
+
+
+###########
+## Игры ##
+###########
+
+$ sudo pacman -S steam  # установим игровой центр
+
+$ sudo pacman -S superuxkart  # гоночки
+
+$ sudo pacman -S gnome-mahjongg  # маджонг
+
+$ sudo pacman -S aisleriot  # косынка
+
+
+##################
+## Инструменты ##
+##################
+
+$ sudo pacman -S cherrytree  # иерархическое приложение заметок
+
+$ sudo pacman -S galculator  # калькулятор
+
+$ sudo pacman -S leafpad  # текстовый редактор
+
+$ sudo pacman -S clipit  # менеджер буфера обмена
+
+$ yaourt qt4-fsarchiver  # резервное копированние разделов
+
+$ sudo pacman -S gnome-disk-utility  # утилита дисков (может делать: тест диска, образ диска и т.д.)
+
+$ yaourt engrampa-thunar  # архиватор
+
+
+###############
+## Интернет ##
+###############
+
+$ sudo pacman -S geary  # почтовая программа
+
+$ sudo pacman -S transmission-gtk  # торрент-трекер
+
+$ sudo pacman -S skype  # видео вызовы
+Browser
+$ yaourt teamviewer  # удаленный доступ к компьютеру 
+
+## $ sudo systemctl enable teamviewerd  # добавляем службу в автозагрузку
+
+## $ sudo systemctl start teamviewerd  # запускаем службу
+
+$ yaourt telegram-desktop-bin  # клиент телеграм
+
+
+#########################
+## Облачные хранилища ##
+#########################
+
+$ yaourt -S dropbox thunar-dropbox # облачное хранилище
+
+$ yaourt megasync  # облачное хранилище
+
+$ yaourt mailru-cloud  # облачное хранилище
+
+$ yaourt -S insync insync-thunar  # google диск (плюс врсия)
+
+$ yaourt vkaudiosaver  # программа для закачки и просушивания музыки с vk.com
+
+
+###################
+## Мультимедиа ##
+###################
+
+$ yaourt bomi  # мультиплеер
+
+$ sudo pacman -S cheese  # вебкамера
+
+$ sudo pacman -S kdenlive  # видеоредактор
+
+$ sudo pacman -S simplescreenrecorder  # запись видео с экрана
+
+
+################
+## Настройки ##
+################
+
+$ sudo pacman -S flashplugin f2fs-plugin  # флэш плеер
+
+$ sudo pacman -S gufw  # linux фаервол
+
+
+###########
+## Офис ##
+###########
+
+$ sudo pacman -S libreoffice-fresh libreoffice-fresh-ru  # офисный пакет (аналог microsoft office)
+
+$ sudo pacman -S qpdfview   # программа для просмотра pdf, djvu
+
+$ yaourt sublime-text-dev  # текстовый редактор
+
+
+#############
+## Система ##
+#############
+
+$ yaourt grub-customizer  # графический менеджер настроек grub
+
+$ sudo pacman -S gparted  # разметка диска
+
+$ sudo pacman -S hardinfo  # показывает инфо о PC
+
+$ yaourt i-nex  # вывод системной информации
+
+
+###########
+## Wine ##
+###########
+
+$ yaourt 2gis  # интерактивная карта города

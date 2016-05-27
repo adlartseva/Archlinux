@@ -1,0 +1,69 @@
+###############################
+## Настройка после установки ##
+###############################
+
+# hwclock --systohc --utc  # настроим дату и время по UTC
+
+# useradd -m -G wheel -s /bin/bash username  # создаем пользователя
+
+# passwd username  # задаем пароль пользователю
+
+# EDITOR=nano visudo  # открываем sudoers и присвоем нашему пользователю права wheel расскоментировав строчку
+
+   %wheel ALL=(ALL) NOPASSWD: ALL
+
+# echo myhost > /etc/hostname  # вместо myhost пишем любое название нашего ПК
+
+# cat /etc/hostname  # проверяем
+
+# nano /etc/hosts  # в первой строчке, вместо localhost пишем имя своего пк
+
+# systemctl enable dhcpcd  # добавим службу dhcpcd в автозагрузку
+
+# reboot  # перезагрузка
+
+$ sudo nano /etc/pacman.conf  # расскоментируем color и multilib и добавим ILoveCandy
+
+$ sudo pacman -Syu bash-completion  # установим доп. утилиту для авто дополнения в bash 
+
+#######################
+## Установка пакетов ##
+#######################
+
+$ sudo pacman -S xf86-input-synaptics  # драйвер для тачпада
+
+$ sudo pacman -S xorg-xinit xorg-server xorg-server-utils xorg-utils xterm  # Ставим иксы
+
+$ sudo pacman -S alsa-utils pulseaudio pulseaudio-alsa pavucontrol libcanberra-pulse pa-applet libpulse orc lib32-libpulse lib32-alsa-plugins lib32-libcanberra-pulse  # заводим звук
+
+$ sudo pacman -S xfce4 xfce4-goodies  # устанавливаем окружение
+
+$ sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings  # менеджер входа в систему и его настройки
+
+$ sudo pacman -S networkmanager network-manager-applet  # программа, облегчающая определение и конфигурацию средств для автоматического подключения к сети
+
+###############
+## Настройка ##
+###############
+
+$ startxfce4  # заходим в xfce4
+
+$ cp /etc/X11/xinit/xinitrc ~/.xinitc  # копируем xinitrc в домашнюю директорию и добавим в него 
+      
+      exec startxfce4
+
+$ sudo sysemctl enable lightdm.service  # запускаем службу lightdm
+
+$ sudo nano /etc/pacman.conf  # добавляем репозиторий yaourt
+
+[archlinufr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch  
+
+$ sudo pacman -Syu yaourt  # устанавливаем yaourt 
+
+$ sudo systemctl enable NetworkManager.service  # добавим службу в автозагрузку
+
+$ sudo systemctl disable bluetooth.service  # отключаем службу блютуз
+
+$ sudo reboot  # перезагрузка

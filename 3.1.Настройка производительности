@@ -1,0 +1,37 @@
+##################################
+## Настройка производительности ##
+##################################
+
+$ sudo nano /etc/systemd/system.conf  # убираем задержку в 90сек.
+
+      DumpCore=no  # меняем yes на no
+      DefaultTimeoutStartSec=10s  # уменьшаем время старта системы
+      DefaultTimeoutStopSec=05s  # уменьшаем время выключения системы
+
+$ sudo pacman -S polkit  # для управления системными привилегиями. если не стоит, то установить
+
+$ sudo nano /etc/polkit-1/rules.d/10-disable-suspend.rules  # убираем спящий режим и гибернацию (из меню и вообще). (если этого файла нет, то создать) Файл должен выглядить вот так:
+
+  polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.login1.suspend" ||
+        action.id == "org.freedesktop.login1.suspend-multiple-sessions" ||
+        action.id == "org.freedesktop.login1.hibernate" ||
+        action.id == "org.freedesktop.login1.hibernate-multiple-sessions")
+    {
+        return polkit.Result.NO;
+    }
+});
+
+$ sudo nano /etc/systemd/coredump.conf  # отключаем журналирование аварийных дампов памяти приложений. расскоментируем строчку
+
+   Storage=none
+
+$ sudo systemctl daemon-reload   # перезагрузим демона
+
+$ sudo reboot  # перезагрузка
+
+sudo nano /etc/systemd/journald.conf  # уменьшим размер журналирования
+
+    SystemMaxUse=50M  # расскоментировать и дописать "50M"
+
+$ journalctl --disk-usage  # посмотреть сколько места занимают журналы

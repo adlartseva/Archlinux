@@ -1,0 +1,43 @@
+############
+## Шрифты ##
+############
+
+$ sudo pacman -S ttf-liberation ttf-bitstream-vera ttf-dejavu ttf-ubuntu-font-family  # шрифты
+
+#####################
+## Infinality font ##
+#####################
+
+$ sudo nano /etc/pacman.conf  # добавляем репозитории
+
+[infinality-bundle]
+SigLevel = Never
+Server = http://bohoomil.com/repo/$arch
+
+[infinality-bundle-multilib]
+SigLevel = Never
+Server = http://bohoomil.com/repo/multilib/$arch
+
+[infinality-bundle-fonts]
+SigLevel = Never
+Server = http://bohoomil.com/repo/fonts
+
+$ sudo pacman -Syy  # синхронизируем базу данных
+
+$ sudo pacman -S freetype2-infinality-ultimate lib32-freetype2-infinality-ultimate # устанавиваем шрифты, 32-бит библиотеки для шрифтов 
+
+$ sudo reboot  # перезагрузка
+
+$ sudo pacman -S fontconfig-infinality-ultimate  # устанавливаем конфиги для шрифтов
+
+$ cd /etc/fonts/conf.d  # переходим в директорию шрифтов
+
+$ sudo ln -s ../conf.avail.infinality/36-repl-missing-glyphs.conf .  # заменим стандартные шрифты на infinality шрифты
+
+$ sudo fc-presets set  # выберем стиль шрифтов 
+
+     2.free
+
+$ sudo fc-match "monospace"  # обновим стиль шрифтов и для браузеров
+
+$ sudo fc-cache -fr  # очистим кэш шрифтов 
