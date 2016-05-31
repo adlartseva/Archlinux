@@ -1,0 +1,29 @@
+##################
+## Kernel-panic ##
+##################
+
+# загружаемся из под usb Archlinux Livecd
+
+# mount /dev/sdX /mnt  # примонтируем корневой раздел (X - буква раздела)
+
+# mount /dev/sdaXZ /mnt/boot  # примонтируем раздел boot, если он был вынесен гп отдельный раздел (XZ - буква и номер раздела)
+
+# mount --bind /dev /mnt/dev  # биндим
+
+# mount --bind /proc /mnt/proc  # биндим
+
+# mount --bind /sys /mnt/sys  # биндим
+
+# arch-chroot /mnt  # зайдем в систему под чрутом
+
+# find /var/cache/pacman/pkg -name 'linux-4*'  # найдем предыдущие ядро в кэше
+
+# если его там нет, то откатимся по другому СМ.42.Downgrade - откат к старой версии
+
+# pacman -U /var/cache/pacman/pkg/linux-4.xx-x.pkg.tar.xz  # и просто переустановим его
+
+# reboot  # перезагрузка
+
+# Так же можно попробовать поставить модифицированне ядро с упором на производительность:
+
+  # pacman -S linux-zen
