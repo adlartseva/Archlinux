@@ -1,0 +1,112 @@
+#####################
+## Rxvt - терминал ##
+#####################
+
+$ sudo pacman -S rxvt-unicode  # установим терминал
+
+$ yaourt rxvt-unicode-better-wheel-scrolling  # установим патч прокрутки
+
+$ urxvt  # команда запуска
+
+$ nano ~/.Xresources  # здесть можно настраивать терминал
+
+#################################################################
+## Настройка ##
+######################
+## Полоса прокрутки ##
+######################
+
+! стиль полосы прокрутки - rxvt (по умолчанию), plain (самый компактный), next, или xterm
+URxvt.scrollstyle: rxvt
+
+!полоса прокрутки может быть полностью отключена
+URxvt.scrollBar: false
+
+##############################
+## Позиция полосы прокрутки ##
+##############################
+
+! Не прокручивать при выводе
+URxvt*scrollTtyOutput: false
+
+! прокручивать по отношению к буферу (прокрутка мышью или Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! прокрутка по нажатию клавиши
+URxvt*scrollTtyKeypress: true
+
+##############################################
+## Прокрутка буфера в дополнительном экране ##
+##############################################
+
+!Когда вы прокручиваете постранично во вторичном экране (например less без опции-X), будет хорошей идеей отключить прокрутку буфера, чтобы иметь возможность прокручивать именно постранично вторичный экран, а не буфер терминала: это неизменено по умолчанию в терминалах на основе vte
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+
+!патч прокрутки
+URxvt.secondaryWheel: 1
+
+
+##############################
+## Методы декларации шрифта ##
+##############################
+
+URxvt.font: 9x15
+
+!bold (толстый)
+URxvt.font: 9x15bold
+
+URxvt.font: xft:monaco:size=10
+
+!Расстояние шрифта
+!Здесь -1 уменьшается расстояние от одного пикселя
+URxvt.letterSpace: -1
+
+
+###########
+## Цвета ##
+###########
+
+! Background color
+URxvt*background: black
+
+! Цвет шрифта
+URxvt*foreground: white
+
+! Другие цвета
+URxvt*color0: black
+URxvt*color1: red3
+URxvt*color2: green3
+URxvt*color3: yellow3
+URxvt*color4: blue2
+URxvt*color5: magenta3
+URxvt*color6: cyan3
+URxvt*color7: gray90
+URxvt*color8: grey50
+URxvt*color9: red
+URxvt*color10: green
+URxvt*color11: yellow
+URxvt*color12: blue
+URxvt*color13: magenta
+URxvt*color14: cyan
+URxvt*color15: white
+
+!ссылки могут быть окрашены с помощью #Цвета переднего плана (foreground) или фона (background)
+URxvt.matcher.rend.0: Uline Bold fg5
+
+!Цвета как в Xterm
+URxvt*color12: rgb:5c/5c/ff
+
+$ xrdb -merge ~/.Xresources  # объедним настройки xterm и urxvt
+
+#########################
+## Родная прозрачность ##
+#########################
+
+!Родная прозрачность
+URxvt*.transparent: true
+! URxvt*.shading: 0 to 99 darkens, 101 to 200 lightens
+URxvt*.shading: 110
+
+!По умолчанию URxvt не имеет значка на панели задач. Тем не менее, это можно легко изменить путем добавления строки, указывающей на нужную иконку
+URxvt.iconFile:    /usr/share/icons/Clarity/scalable/apps/terminal.svg

@@ -1,0 +1,190 @@
+###############################
+## X resources - настройка X ##
+###############################
+
+Xresources - это настраиваемый на уровне пользователя dotfile ("точкафайл", dotfiles), как правило, находящийся по пути ~/.Xresources. Он может быть использован для установки ресурсов X, параметров настроек для клиентских приложений X.
+Они может сделать много операций, в том числе:
+
+		определить цвета терминала
+ 		
+ 		настроить предпочтения терминала
+		
+		задать DPI монитора, сглаживание (antialiasing), 
+
+		хинтование (hinting) и другие настройки шрифтов X
+		
+		изменить тему Xcursor
+		
+		установить тему xscreensaver
+		
+		изменять предпочтения низкоуровневых приложений X (xclock (xorg-xclock), xpdf, rxvt-unicode, и т.д.)
+
+###############
+## Настройка ##
+###############
+
+$ sudo pacman -S xorg-xrdb  # установим утилиты базы данных Xserver
+
+##############################################################
+Файл ~/.Xresources не существует по умолчанию. Это обычный текстовый файл, вы можете создавать и редактировать его с помощью любого текстового редактора. После создания, он будет "разобран" на программы  xrdb (базы данных ресурсов Xorg) автоматически		
+##############################################################
+
+$ xrdb ~/.Xresources  # перечитать файл и удалить старые ресурсы
+
+$ xrdb -merge ~/.Xresources  # перечитать файл и сохранить старые ресурсы
+
+! - это коментарий (закоментировать)
+
+######################
+## Включение файлов ##
+######################
+
+# Чтобы использовать различные файлыдля каждого проложения исользуем  "#include" в главном файле
+
+$ nano ~/.Xresources  # пример
+
+		#include ".Xresources.d/xterm"
+		#include ".Xresources.d/rxvt-unicode"
+		#include ".Xresources.d/fonts"
+		#include ".Xresources.d/xscreensaver"
+
+$ nano ~/.xinitrc  # если файлы не удалось загрузить для xrdb, то добавим строки
+
+        xrdb -I$HOME ~/.Xresources
+
+###########
+## Цвета ##
+###########
+
+# Большинство терминалов, в том числе xterm и urxvt, поддерживают по крайней мере 16 базовых цветов
+
+! Цвета терминала ------------------------------------------------------------
+
+! Схема tangoesque 
+*background: #111111
+*foreground: #babdb6
+! Black (not tango) + DarkGrey (Чёрный (не танго)+ТёмноСерый)
+*color0:  #000000
+*color8:  #555753
+! DarkRed + Red (ТёмноКрасный+Красный)
+*color1:  #ff6565
+*color9:  #ff8d8d
+! DarkGreen + Green (ТёмноЗелёный+Зелёный)
+*color2:  #93d44f
+*color10: #c8e7a8
+! DarkYellow + Yellow (ТёмноЖёлтый+Жёлтый)
+*color3:  #eab93d
+*color11: #ffc123
+! DarkBlue + Blue (ТёмноСиний+Синий)
+*color4:  #204a87
+*color12: #3465a4
+! DarkMagenta + Magenta (ТёмноПурпурный+Пурпурный)
+*color5:  #ce5c00
+*color13: #f57900
+!DarkCyan + Cyan (both not tango) (ТёмноГолубой+Голубой (оба не танго))
+*color6:  #89b6e2
+*color14: #46a4ff
+! LightGrey + White (СветлоСерый+Белый)
+*color7:  #cccccc
+*color15: #ffffff
+
+################################################################### Курсор ##
+#############
+
+# темы лежат по пути: /usr/share/icons
+
+! Xcursor --------------------------------------------------------------------
+
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size:  22
+
+################################################################## Шрифт ##
+###########
+
+! Xft settings ---------------------------------------------------------------
+
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+################################################################
+## Ресурсы Xterm ##
+###################
+
+! xterm ----------------------------------------------------------------------
+
+xterm*VT100.geometry:     80x25
+xterm*faceName:           Terminus:style=Regular:size=10
+!xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
+xterm*dynamicColors:      true
+xterm*utf8:               2
+xterm*eightBitInput:      true
+xterm*saveLines:          512
+xterm*scrollKey:          true
+xterm*scrollTtyOutput:    false
+xterm*scrollBar:          true
+xterm*rightScrollBar:     true
+xterm*jumpScroll:         true
+xterm*multiScroll:        true
+xterm*toolBar:            false
+
+################################################################
+## Легковесные приложения ##
+############################
+
+$ sudo pacman -S xpdf  # легковесное приложение для просмотра pdf
+
+$ nano ~/.xpdfrc  # файлы настроек
+
+################################################################
+## Xpdf ##
+##########
+
+! xpdf -----------------------------------------------------------------------
+
+xpdf*enableFreetype:    yes
+xpdf*antialias:         yes
+xpdf*foreground:        black
+xpdf*background:        white
+xpdf*urlCommand:        /usr/bin/firefox %s
+
+################################################################
+## XScreenSaver ##
+##################
+
+! xscreensaver ---------------------------------------------------------------
+
+!Настройки шрифта
+xscreensaver.Dialog.headingFont:        -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.bodyFont:           -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.labelFont:          -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.unameFont:          -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.buttonFont:         -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.dateFont:           -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.passwd.passwdFont:         -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
+!Общее диалоговое окно (влияет на текст: hostname, username, и password )
+xscreensaver.Dialog.foreground:         #ffffff
+xscreensaver.Dialog.background:         #111111
+xscreensaver.Dialog.topShadowColor:     #111111
+xscreensaver.Dialog.bottomShadowColor:  #111111
+xscreensaver.Dialog.Button.foreground:  #666666
+xscreensaver.Dialog.Button.background:  #ffffff
+!username/password окно ввода и цвет текста date
+xscreensaver.Dialog.text.foreground:    #666666
+xscreensaver.Dialog.text.background:    #ffffff
+xscreensaver.Dialog.internalBorderWidth:24
+xscreensaver.Dialog.borderWidth:        20
+xscreensaver.Dialog.shadowThickness:    2
+!Бар таймаута (background фактически определяется Dialog.text.background)
+xscreensaver.passwd.thermometer.foreground:  #ff0000
+xscreensaver.passwd.thermometer.background:  #000000
+xscreensaver.passwd.thermometer.width:       8
+!Формат штампа даты -- смотрите руководство для уточнения деталей strftime(3)
+xscreensaver.dateFormat:    %I:%M%P %a %b %d, %Y
+
+################################################################
+
+# Экранные менеджеры, такие как GDM и LightDM, могут запускать xrdb с опцией --nocpp
+

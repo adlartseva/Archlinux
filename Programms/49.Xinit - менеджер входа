@@ -1,0 +1,95 @@
+###########################
+## Xinit - менеджр входа ##
+###########################
+
+Файл ~/.xinitrc представляет собой шелл-скрипт передаваемый xinit посредством команды startx. Программа xinit запускает Xorg сервер и работает в качестве программы первого клиента на системах не использующих Экранный менеджер.
+
+$ sudo pacman -S xorg-xinit  # установим Xinit
+
+$ cp /etc/X11/xinit/xinitrc ~/.xinitrc  # скопируем конфиг в домашний каталог
+
+$ startx  # для запуска xorg от имени пользователя
+
+$ startx /etc/xdg/xfce4  # альтернативный запуск DE с целью "попробывать" (указать путь к оконному менеджеру)
+
+######################################
+## Автозапуск X при входе в систему ##
+######################################
+
+$ sudo nano ~/.bash_profile  # добавим строчки, если bash
+
+$ sudo nano  ~/.zlogin  # добавим строчки, если zsh
+
+  [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
+*** Если вы хотите оставаться в системе, когда заканчивается Х сессия, удалите exec. ***  
+
+#################################################################
+## Выбор DE ##
+##############
+
+$ nano ~/.xinitrc  # добавим строчки, если на pc присутствуют несколько DE
+
+  # Xfce передаётся по умолчанию
+session=${1:-xfce}
+
+case $session in
+    awesome           ) exec awesome;;
+    dwm               ) exec dwm;;
+    xfce|xfce4        ) exec startxfce4;;
+    openbox           ) exec openbox-session;;
+    i3|i3wm           ) exec i3;;
+    jwm               ) exec jwm;;
+    # Не известная сессия, попробуйте запустить в качестве команды
+    *) exec $1;;
+esac
+
+$ cp /etc/X11/xinit/xserverrc ~/.xserverrc  # скопируем в домашнюю директорию
+
+# теперь можно легко запускать конкретный DE передавая аргумент
+
+	$ xinit
+	$ xinit awesome
+	$ xinit dwm
+	$ xinit startxfce4
+	$ xinit openbox-session
+	$ xinit i3
+	$ xinit jwm
+
+ИЛИ ИЛИ ИЛИ
+
+    $ startx
+	$ startx awesome
+	$ startx dwm
+	$ startx startxfce4
+	$ startx openbox-session
+	$ startx i3
+	$ startx jwm
+
+Xinit может быть быстрее, чем startx		
+
+#################################################################
+## Пример ##
+##############
+## .xinitrc ##
+##############
+
+...
+
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
+fi
+
+# twm &
+# xclock -geometry 50x50-1+1 &
+# xterm -geometry 80x50+494+51 &
+# xterm -geometry 80x20+494-0 &
+# exec xterm -geometry 80x66+0+0 -name login
+
+## некоторые приложения, которые должны быть запущены в фоновом режиме
+exec startxfce
+exec chromium  # есди добавить любые программы, то их можно будет запускать без оконного менеджера. Полезнее всего для запуска игр,
+               # чтобы улучшить их производительность. Т.к. при таком способе оконный менеджер не будет использовать память и процессор.
