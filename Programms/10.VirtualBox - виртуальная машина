@@ -31,7 +31,7 @@ $ sudo mount -t vboxsf -o rw,uid=1000,gid=1000 vboxshare vboxshare  # указы
 ## Гостевая ОС ##
 #################
 
-$ sudo pacman -S virtualbox-guest-dkms # для запуска иксов на виртуальнной машине (или linux-headers )
+$ sudo pacman -S virtualbox-guest-modules-arch  # для запуска иксов на виртуальнной машине (или linux-headers )
 
 $ sudo pacman -S virtualbox-guest-utils  # утилиты для гостевой ОС
 
