@@ -16,7 +16,7 @@
 
 # cp -vf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup  # сделаем резервную копию файла mirrorlist
 
-# reflector -c 'Russia' -f 12 -l 12 -n 12 --verbose --save /etc/pacman.d/mirrorlist  # отсортирует зеркала по скорости и обновит mirrorlist
+# reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist  # отсортирует зеркала по скорости и обновит mirrorlist
 
 # lsblk  # проверяем разделы диска
 
