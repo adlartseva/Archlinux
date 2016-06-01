@@ -21,3 +21,13 @@ $ sudo nano /etc/default/grub  # сократим время загрузки gr
   GRUB_TIMEOUT=3  # вместо "10" ставим "3" секунды
  
  $ sudo grub-mkconfig -o /boot/grub/grub.cfg  # обновляем grub
+ 
+##########################
+## Резервная копия grub ## 
+##########################
+
+$ sudo dd if=/dev/sda of=~/mbr.backup bs=512 count=1  # делаем резервную копию загрузчика grub
+
+$ sudo dd if=/mnt/username/mbr.backup of=/dev/sda bs=446 count=1  # восстанавливаем из рзервной копии загрузчик grub
+
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg  # обновляем grub
