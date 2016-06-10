@@ -4,48 +4,33 @@
 
 $ systemd-analyze  # показывает за какое время была загружена система
 
-$ mkinitcpio -M  # покажет модули, которые загружаются в месте с системой
-
-$ mkinitcpio -M > modules.txt  # команда запишет в файл все модули, которые загружаются весте с системой
-
-$ lspci -v | grep ahci  # смотрим используется ли модуль системой
-
-     ath3k
-
 $ udevadm info --attribute-walk -n /dev/sda1 | grep 'DRIVERS=="[^"]'  # узнаем атрибуты устройства
 
-###########################################################################################################
-## Во время загрузки (grub) выберим с какого ядра грузится и хдесь же изменим параметры в строке "linux" ##
+# cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.back  # сделаем резервную копию конфига
 
-    linux    /boot/vmlinuz-linux root=UUID=........ rw quiet break=postmount
-###########################################################################################################
-
-# lsmod  # посмотрим состояние модулей
-
-# cp /etc/mkinitcpio.comf /etc/mkinitcpio.conf.back  # сделаем резервную копию конфига
-
-# nano mkinitcpio.conf  # отредактируем конфиг
+# nano /etc/mkinitcpio.conf  # отредактируем конфиг
 
   MODULES="ahci sd_mod ext4"   # добавим модулей
 
   BINARIES="fsck fsck.ext4"  # добавим модулей
 
-  HOOKS="base keymap"  # удалим все модули, кроме этих
+  HOOKS="systemd"  # удалим все модули, кроме этих
 
-# mkinitcpio -g /boot/initramfs-linux-tiny.img  # сгенирируем ядро
-
-$ reboot  # перезагрузка
-
-############################################################################################################
-## Во время загрузки (grub) выберим с какого ядра грузится и здесь же изменим параметры в строке "initrd" ##
-
-   initrd   /boot/initramfs-linux-tiny.img
-############################################################################################################
-
-$ systemd-analyze  # показывает за какое время была загружена система
-
-$ sudo mkinitcpio -p linux  # обновим загрузочный RAM диск
+# mkinitcpio -p linux  # сгенирируем ядро
 
 $ reboot  # перезагрузка
 
 $ systemd-analyze  # показывает за какое время была загружена система
+
+## Можно попробывать так ##
+
+$ sudo grub-install --compress=gz -9 --recheck /dev/sda  # пересоздадим grub
+
+$ sudo nano /etc/mkinitcpio.conf  # расскоментируем:
+
+   COMPRESSION="gzip"
+   COMPRESSION_OPTIONS="-9"
+
+$ sudo mkinitcpio -p linux # сгенерируем ядро
+
+   

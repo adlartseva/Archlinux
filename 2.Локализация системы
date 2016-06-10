@@ -5,33 +5,22 @@
 # nano /etc/locale.gen  # выбираем русскую локаль
     
     en_US.UTF-8 UTF-8
-    en_US ISO-8859-1
-    ru_RU.KOI8-R KOI8-R
     ru_RU.UTF-8 UTF-8
-    ru_US ISO-8859-5
   
 # locale-gen  # генерируем локали
 
-# locale > /etc/locale.conf  # добавляем локаль
+# echo LANG=ru_RU.UTF-8 > /etc/locale.conf  # добавляем локаль
 
 # cat /etc/locale.conf  # проверяем
 
-# nano /etc/vconsole.conf  # правим консольные шрифты
-     KEYMAP=ru
-     FONT=cyr-sun16 
+# echo -e "KEYMAP=ru\nFONT=cyr-sun16" > /etc/vconsole.conf  # правим консольные шрифты
 
-# nano /etc/mkinitcpio.conf  # добавляем русскцю локаль в HOOKS -> keymap
+# cat /etc/vconsole.conf  # проверим
 
-# localectl set-keymap ru  # выбираем нужный keymap
-
-# setfont cyr-sun16  # выбираем шрифт для консоли
-
-# localectl set-locale LANG="ru_RU.UTF-8"  # выбираем локаль
-
-# export LANG=ru_RU.UTF-8  # экспортируем локаль
+# export LANG=ru_RU.UTF-8  # экспортируем локаль (эта переменная (глобальная))
 
 # mkinitcpio -p linux  # обновим загрузочный RAM диск
 
-# grub-mkconfig - /boot/grub/grub.cfg  # обновим grub для руссификации
+# grub-mkconfig -o /boot/grub/grub.cfg  # обновим grub для руссификации
 
 # reboot  # перезагрузка  

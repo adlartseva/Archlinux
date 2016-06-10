@@ -2,11 +2,13 @@
 ## Настройка производительности ##
 ##################################
 
+$ systemd-analyze  # смотрим время загрузки системы и сравниваем
+
 $ sudo nano /etc/systemd/system.conf  # убираем задержку в 90сек.
 
       DumpCore=no  # меняем yes на no
       DefaultTimeoutStartSec=10s  # уменьшаем время старта системы
-      DefaultTimeoutStopSec=05s  # уменьшаем время выключения системы
+      DefaultTimeoutStopSec=5s  # уменьшаем время выключения системы
 
 $ sudo pacman -S polkit  # для управления системными привилегиями. если не стоит, то установить
 
@@ -30,12 +32,18 @@ $ sudo systemctl daemon-reload   # перезагрузим демона
 
 $ sudo reboot  # перезагрузка
 
-sudo nano /etc/systemd/journald.conf  # уменьшим размер журналирования
+$ sudo nano /etc/systemd/journald.conf  # уменьшим размер журналирования
 
     SystemMaxUse=50M  # расскоментировать и дописать "50M"
 
 $ journalctl --disk-usage  # посмотреть сколько места занимают журналы
 
+$ sudo journalctl --vacuum-size=20000  # почистить журнал
+
 ##############
 
 $ systemd-analyze plot > plot.svg  # создастся файл svg. где наглядно будет показан график загрузки системы. Т.е. что загружается вместе с ней.
+
+## avahi ##
+
+$ sudo systemctl disable avahi-daemon  # отключим avahi демон

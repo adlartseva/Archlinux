@@ -8,52 +8,44 @@
 ## Установка ##
 ###############
 
-# setfont iso02-12x22  # делаем шрифт крупнее
-
-# pacman -Syy  # синхронизация базы данных
-
-# pacman -S reflector  # утанавливаем рефлектор (скрипт, который автоматизирует процесс настройки зеркал) 
+# pacman -Sy reflector  # утанавливаем рефлектор (скрипт, который автоматизирует процесс настройки зеркал) 
 
 # cp -vf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup  # сделаем резервную копию файла mirrorlist
 
 # reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist  # отсортирует зеркала по скорости и обновит mirrorlist
 
+# pacman -Sy  # синхронизация базы данных
+
 # lsblk  # проверяем разделы диска
 
 # cfdisk /dev/sda  # псевдографическая разметка диска
 
-    sda1  -boot  260M
-    sda2  -/     50M
-    sda3  -home  100G
-    sda4  -swap  4G
+    sda1  -/     50M
+    sda2  -home  100G
 
-# mkfs.ext2 /dev/sda1 -L boot  # форматируем раздел под boot
+# mkfs.ext4 /dev/sda1 -L "ROOT"  # форматируем раздел под корневой раздел
 
-# mkfs.ext4 /dev/sda2 -L root  # форматируем раздел под корневой раздел
+# mkfs.ext4 /dev/sda2 -L "HOME"  # форматируем раздел под домашний раздел
 
-# mkfs.ext4 /dev/sda3 -L home  # форматируем раздел под домашний раздел
+# export root=/mnt  # задаем переменную для /mnt
 
-# mkswap /dev/sda4 -L swap     # форматируем раздел под swap
+# mount /dev/sda1 $root  # монтируем корневой раздел
 
-# mount /dev/sda2 /mnt  # монтируем корневой раздел
+# mkdir -p $root/home  # создаем директорию для домашнего раздела
 
-# mkdir /mnt/boot  # создаем директорию для boot
+# mount /dev/sda2 $root/home  # монтируем домашний раздел
 
-# mkdir /mnt/home  # создаем директорию для домашнего раздела
+# pacstrap $root base base-devel  # устанавливаем нашу систему
 
-# mount /dev/sda1 /mnt/boot  # монтируем boot
+  ** pacstrap -i  # обеспечивает запрос пользователя перед установкой пакета.
 
-# mount /dev/sda3 /mnt/home  # монтируем домашний раздел
+# genfstab -U $root >> $root/etc/fstab  # генерируем fstab
 
-# swapon /dev/sda4  # подключаем свап
+  ** -L  # заставит использовать метки диска
 
-# pacstrap /mnt base base-devel  # устанавливаем нашу систему
+# cat $root/etc/fstab  # проверяем
 
-# genfstab -U /mnt >> /mnt/etc/fstab  # генерируем fstab
-
-# cat /mnt/etc/fstab  # проверяем
-
-# arch-chroot /mnt  # переключаемся в установленную систему
+# arch-chroot $root  # переключаемся в установленную систему
 
 sh-4.3# passwd  # задаем пароль для суперпользователя
 
@@ -67,6 +59,6 @@ sh-4.3# grub-mkconfig -o /boot/grub/grub.cfg  # конфигурируем grub
 
 sh-4.3# exit  # выходим из установленной системы
 
-# umount /mnt -R  # отмонтируем все разделы жесткого диска
+# umount $root -R  # отмонтируем все разделы жесткого диска
 
 # reboot  # перезагрузка

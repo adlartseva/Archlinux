@@ -4,7 +4,7 @@
 ## Folders ##
 #############
 
-$ sudo pacman -S xdg-user-dirs  #утилита для автосоздания пользовательских папок
+$ sudo pacman -S xdg-user-dirs  # утилита для автосоздания пользовательских папок
 
 $ xdg-user-dirs-update  # команда создание папок
 

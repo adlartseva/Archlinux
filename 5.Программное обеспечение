@@ -26,8 +26,6 @@ $ sudo pacman -S gimp  # аналог Photoshop (более новая верс�
 
 $ sudo pacman -S inkscape  # программа для редактирования векторной графики
 
-$ sudo pacman -S variety  # авто смена обоев
-
 
 ###########
 ## Игры ##
@@ -35,7 +33,7 @@ $ sudo pacman -S variety  # авто смена обоев
 
 $ sudo pacman -S steam  # установим игровой центр
 
-$ sudo pacman -S superuxkart  # гоночки
+$ sudo pacman -S supertuxkart  # гоночки
 
 $ sudo pacman -S gnome-mahjongg  # маджонг
 
@@ -62,6 +60,7 @@ $ yaourt engrampa-thunar  # архиватор
 
 $ sudo pacman -S geany  # программа для редактирования кода
 
+
 ###############
 ## Интернет ##
 ###############
@@ -71,12 +70,12 @@ $ sudo pacman -S geary  # почтовая программа
 $ sudo pacman -S transmission-gtk  # торрент-трекер
 
 $ sudo pacman -S skype  # видео вызовы
-Browser
+
 $ yaourt teamviewer  # удаленный доступ к компьютеру 
 
-## $ sudo systemctl enable teamviewerd  # добавляем службу в автозагрузку
+ ** $ sudo systemctl enable teamviewerd  # добавляем службу в автозагрузку
 
-## $ sudo systemctl start teamviewerd  # запускаем службу
+ ** $ sudo systemctl start teamviewerd  # запускаем службу
 
 $ yaourt telegram-desktop-bin  # клиент телеграм
 
@@ -100,7 +99,7 @@ $ yaourt vkaudiosaver  # программа для закачки и просу�
 ## Мультимедиа ##
 ###################
 
-$ yaourt bomi  # мультиплеер
+$ sudo pacman -S smplayer smplayer-themes smplayer-skins  # мультиплеер
 
 $ sudo pacman -S cheese  # вебкамера
 
@@ -115,8 +114,6 @@ $ sudo pacman -S simplescreenrecorder  # запись видео с экрана
 
 $ sudo pacman -S flashplugin f2fs-plugin  # флэш плеер
 
-$ sudo pacman -S gufw  # linux фаервол
-
 
 ###########
 ## Офис ##
@@ -124,7 +121,7 @@ $ sudo pacman -S gufw  # linux фаервол
 
 $ sudo pacman -S libreoffice-fresh libreoffice-fresh-ru  # офисный пакет (аналог microsoft office)
 
-$ sudo pacman -S qpdfview   # программа для просмотра pdf, djvu
+$ yaourt qpdfview   # программа для просмотра pdf, djvu
 
 $ yaourt sublime-text-dev  # текстовый редактор
 

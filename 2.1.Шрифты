@@ -2,7 +2,7 @@
 ## Шрифты ##
 ############
 
-$ sudo pacman -S ttf-liberation ttf-bitstream-vera ttf-dejavu ttf-ubuntu-font-family  # шрифты
+$ sudo pacman -S ttf-liberation ttf-bitstream-vera ttf-dejavu ttf-ubuntu-font-family cantarell-fonts # шрифты
 
 #####################
 ## Infinality font ##
@@ -36,7 +36,12 @@ $ sudo ln -s ../conf.avail.infinality/36-repl-missing-glyphs.conf .  # заме�
 
 $ sudo fc-presets set  # выберем стиль шрифтов 
 
-     2.free
+     3.ms
+
+$ sudo nano /etc/X11/xinit/xinitrc.d/infinality-settings.sh  # сделаем шрифты темными, четкими и достаточно толстыми. Допишим
+
+   # Делает шрифты темнее и толще при отрицательном значении. При положительном осветляет
+   export INFINALITY_FT_BRIGHTNESS="-20"
 
 $ sudo fc-match "monospace"  # обновим стиль шрифтов и для браузеров
 
