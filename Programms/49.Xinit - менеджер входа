@@ -18,13 +18,21 @@ $ startx /etc/xdg/xfce4  # альтернативный запуск DE с це�
 
 $ sudo nano ~/.bash_profile  # добавим строчки, если bash
 
-$ sudo nano  ~/.zlogin  # добавим строчки, если zsh
+$ sudo nano  ~/.zprofile  # добавим строчки, если zsh
 
   [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 
+$ sudo mkdir /etc/systemd/system/getty@tty1.service.d  # создадим папку
+
+$ sudo echo -e "[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin username --noclear %I 38400 linux" > /etc/systemd/system/getty@tty1.service.d/autologin.conf  # заполним файл для автологина 
+
 *** Если вы хотите оставаться в системе, когда заканчивается Х сессия, удалите exec. ***  
 
-#################################################################
+$ sudo reboot  # перезагрузка
+
+# если возникнут проблемы смотрим: https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console
+
+################################################################
 ## Выбор DE ##
 ##############
 

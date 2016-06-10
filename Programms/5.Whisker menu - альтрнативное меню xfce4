@@ -2,8 +2,6 @@
 ## Whisker menu - альтернативное меню xfce4 ##
 ###############################################
 
-$ sudo pacman -S xfce4-whiskermenu-plugin  # альтернативное меню для xfce
-
 $ nano ~/.gkrc-2.0  # покрасим меню. добавляем строки   
  
 		style "gtk-theme-config-panel" {
@@ -36,7 +34,7 @@ $ nano ~/.gkrc-2.0  # покрасим меню. добавляем строки
 
 $ yaourt mugshot  # программа для обновления инфо о пользователи
 
-$ sudo pacman -S accountsservice gstream0.10-good-plugins  # дополнительные утилиты, без которых mugshot не будет работать
+$ sudo pacman -S accountsservice gstreamer0.10-good-plugins  # дополнительные утилиты, без которых mugshot не будет работать
 
 $ yaourt menulibre  # утилита для редактирования меню
 

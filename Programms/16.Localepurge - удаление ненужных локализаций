@@ -6,14 +6,12 @@ $ yaourt localepurge  # программа для удаления ненужн�
 
 $ sudo nano /etc/locale.nopurge  # добавим локали, которые хотим оставить
 
+    ru
+    ru_RU
+    ru_RU.UTF-8 UTF-8
     en
     en_US
     en_US.UTF-8 UTF-8
-    en_US ISO-8859-1
-    ru_RU
-    ru_RU.KOI8-R KOI8-R
-    ru_RU.UTF-8 UTF-8
-    ru_US ISO-8859-5
 
     #NEEDSCONFIGFIRST  # закоментировать
 

@@ -21,4 +21,48 @@ $ sudo nano /etc/pacman.conf  # или добавим репозиторий в 
 
 $ sudo pacman -S blackarch  # скачаем blackarch
 
+$ sudo pacman -S blackarch-<категория>  # если хотите установить нужную категорию инструментов
+
+$ sudo pacman -Sg | grep blackarch  # посмотреть категории иснструментов 
+
+$ sudo sudo pacman -S blackarch-mirrorlist  # рекомендуется также установить список зеркал
+
 $ sudo reboot  # перезагрузка
+
+############################
+## Категории инструментов ##
+############################
+
+# blackarch-automation
+# Пакеты, которые используются для автоматизации работы инструментов или рабочего процесса. Примеры: blueranger, tiger, wiffy
+
+# blackarch-backdoor
+# Пакеты, которые используют или устанавливают бэкдоры на уязвимых системах. Примеры: backdoor-factory, rrs, weevely
+
+# blackarch-code-audit
+# Пакеты для аудита существующего кода на анлиз уязвимостей. Примеры: flawfinder, pscan
+
+# blackarch-cracker
+# Пакеты, используемые для взлома криптографических функций, например, паролей. Примеры: hashcat, john, crunch
+
+# blackarch-crypto
+# Пакеты, которые работают с криптографией, за исключением взлома. Примеры: ciphertest, xortool, sbd
+
+# blackarch-dos
+# Пакеты, которые используют атаки DoS (Denial of Service - отказ в обслуживании). Примеры: 42zip, nkiller2
+
+# blackarch-packer
+# Пакеты, которые работают упаковщиками или помогают им. Пакеры (packer) - это программы, которые внедряют вредоносный код внутри других исполнимых файлов. Примеры: packerid
+
+# blackarch-scanner
+# Пакеты, которые сканируют выбранные системы на уязвимости. Примеры: scanssh, tiger, zmap
+
+# blackarch-sniffer
+# Пакеты, которые участвуют в анализе сетевого трафика. Примеры: hexinject, pytactle, xspy
+
+# blackarch-social
+# Пакеты, которые преимущественно атакуют сайты социальных сетей. Примеры: jigsaw, websploit
+
+# blackarch-wireless
+# Пакеты, которые работают с беспроводными сетями на любом уровне. Примеры: airpwn, mdk3, wiffy
+ 

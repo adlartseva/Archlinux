@@ -4,9 +4,6 @@
 
 $ sudo pacman -S virtualbox virtualbox-host-modules-arch virtualbox-guest-iso qt4  # устанавливаем виртуальную машину
 
-$ virtualbox-ck-host-modules  # устанавливать если стоит 
-кастомное ядро
-
 $ yaourt virtualbox-ext-oracle  # расширения для виртуальной машины
 
 $ sudo depmod -a  # проверяем какие загружены модули
@@ -31,7 +28,7 @@ $ sudo mount -t vboxsf -o rw,uid=1000,gid=1000 vboxshare vboxshare  # указы
 ## Гостевая ОС ##
 #################
 
-$ sudo pacman -S virtualbox-guest-modules-arch  # для запуска иксов на виртуальнной машине (или linux-headers )
+$ sudo pacman -S linux-headers  # ставим ядро
 
 $ sudo pacman -S virtualbox-guest-utils  # утилиты для гостевой ОС
 
@@ -47,11 +44,11 @@ $ sudo nano /etc/modules-load.d/virtualbox.conf  # добавим модули
     vboxsf
     vboxvideo
 
-$ sudo pacman -S xf86-video-nouveau  # установим драйвера на видеокарту (ati nouveau intel)
-
 $ sudo nano /etc/default/grub  # изменим расширение экрана
 
     GRUB_GFXMODE="1024x768"
+
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg    
 
 ###################################################
 ## Выйти в X: Ctrl+Alt+Backspace или Ctrl+Alt+F2 ##

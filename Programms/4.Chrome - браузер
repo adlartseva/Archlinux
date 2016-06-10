@@ -22,8 +22,6 @@ $ yaourt chromium-pepper-flash  # flash для chrome
 ## @| chrome://extensions ##
 #############################
 
-          Ghostery  # конфиденциальность (скажи жучкам - НЕТ!)
-
           uBlock  # блокировщик рекламы 
 
           EverSync  # синхронизация вкладок/закладок 

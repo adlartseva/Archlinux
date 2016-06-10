@@ -110,3 +110,11 @@ URxvt*.shading: 110
 
 !По умолчанию URxvt не имеет значка на панели задач. Тем не менее, это можно легко изменить путем добавления строки, указывающей на нужную иконку
 URxvt.iconFile:    /usr/share/icons/Clarity/scalable/apps/terminal.svg
+
+#####################
+
+# отображение в заловке терминала последняя введенная команда
+
+$ nano ~/.zshrc  # добавим строки
+
+if [ "$SHELL" = '/bin/zsh' ]; then case $TERM in rxvt|*term|linux) preexec () { print -Pn "\e]0;$1\a" };; esac; fi

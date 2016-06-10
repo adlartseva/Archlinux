@@ -1,10 +1,11 @@
-sysmon.sh :
+#Задаем права
+sysmon :
 - загрузка процессора
 - загрузка памяти
 - температура материнской платы (acpitz-virtual-0)
 - температура графического ядра (nouveau-pci-0100)
 
-sysmon-full-temp.sh :
+sysmon-full-temp :
 - загрузка процессора
 - загрузка памяти
 - температура материнской платы (acpitz-virtual-0)
@@ -12,35 +13,35 @@ sysmon-full-temp.sh :
 - температура Core 0 (первого ядра процессора)
 - температура Core 1 (второго ядра процессора)
 
-netspeed.sh :
+netspeed :
 - скорость соединения
 
-xgamma.sh :
+xgamma :
 - меняет гамму цветов монитора
 
-syndaemon.sh :
+syndaemon :
 - отключает тачпад через 2 сек. (-k -i 2) 
   после того, как вы начали печатать на клавиатуре
 
-vebnout.sh :
+vebnout :
 - запись с веб-камеры ноутбука себя (в левой нижнем углу экрана)  
 
-vebpcdev.sh :
+vebpcdev :
 - запись себя со сторонней вебки (device=/dev/video1)
 
-audio_start.sh :
+audio_start :
 - мелодия при старте
 
-buckup_rs.sh :
+buckup_rs :
 -бэкап файлов (rsync)
 
-devilspie.sh :
+devilspie :
 - автозапуск браузера свернутым
 
-iron.sh :
+iron :
 - информация о железе
 
-system.sh :
+system :
 - информация о системе и ядре
 
 thunar-convert-to-png.sh :
@@ -57,3 +58,28 @@ thunar-video-to-gif.sh :
 
 thunar-upload-to-imgur.sh :
 - отправить в imgur
+
+process :
+- отобразить, запущен процесс (программа) в фоне
+- # source process.sh thunar  # пример
+
+ping :
+- пинг
+
+upgrub :
+- обновить grub (добавить в /usr/bin)
+
+ramup :
+- узнать какие процессы используют всю ram
+
+findf :
+- поиск 10 самых больших файлов
+
+ipfind :
+- узнать IP
+
+genpass :
+- генерация случайного пароля
+
+pacignor :
+- список всех установленных пакетов, которые больше не от кого не зависят

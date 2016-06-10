@@ -53,7 +53,7 @@ $ sudo nano /etc/default/grub  # только здесь желательно р
 
  GRUB_COLOR_NORMAL  # общие цвета текста/фона
 
- GRUB_COLOR_HIGHLIGHT  # цвета текста/фона выделенной строки (сптсок доступных цветов: http://www.gnu.org/software/grub/manual/html_node/color_005fnormal.html#color_005fnormal)
+ GRUB_COLOR_HIGHLIGHT  # цвета текста/фона выделенной строки (список доступных цветов: http://www.gnu.org/software/grub/manual/html_node/color_005fnormal.html#color_005fnormal)
 
  GRUB_GFXMODE  # режим экрана загрузки (разрешение экрана)
 
