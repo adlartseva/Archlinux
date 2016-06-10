@@ -1,0 +1,3 @@
+#!/bin/bash
+# узнать IP
+curl ip.appspot.com

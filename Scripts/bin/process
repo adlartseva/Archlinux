@@ -1,0 +1,8 @@
+#!/bin/bash
+#################
+if [ $(pgrep $1)>'0' ]
+then
+  echo "Запущен"
+else
+  echo "Не запущен"
+fi

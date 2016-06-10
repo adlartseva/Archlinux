@@ -1,0 +1,9 @@
+history.zsh
+bind_key.zsh
+autoload.zsh
+alias_utils.zsh
+alias_user.zsh
+archive.zsh
+alias_type.zsh
+pac_com.zsh
+prompt.zsh

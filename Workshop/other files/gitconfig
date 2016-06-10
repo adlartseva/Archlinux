@@ -1,0 +1,21 @@
+[user]
+    name = sob2vain
+    email = sob2vain@gmail.com
+[core]
+    editor = vim
+[color]
+    diff = true
+    ui = true
+[push]
+  default = simple
+[alias]
+    st = status
+    cm = commit
+[credential]
+    helper = cache --timeout=3600
+[push]
+    default = current    
+[merge]
+  # Always show a diffstat at the end of a merge
+    stat = true
+    tool = meld

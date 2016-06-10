@@ -1,0 +1,74 @@
+############
+## Yaourt ##
+############
+
+## Главные настройки ##
+
+#  ищет конфигурационные файлы для backup'a (.pacnew файлы). Сохраняет все файлы в /var/lib/yaourt/
+AUTOSAVEBACKUPFILE=1  # будет искать конфиг файлы для резервного копирования (.pacnew файлы) после каждой установки
+# DEVEL=0
+# DEVELSRCDIR=""
+# FORCE=0
+# NO_TESTDB=0
+
+## Переменные окружения ##
+
+EDITOR="leafpad"
+TMPDIR="/tmp"  # для временных файлов
+# VISUAL="$VISUAL"
+
+## SUDO ##
+
+# SUDONOVERIF=0      # Избегайте многочисленных проверок SUDO при timestamp_timeout=0
+# SUDOREDIRECT=1     # для устройств распознавания отпечатков пальцев
+
+## ABS ##
+
+# USE_GIT=0
+# REPOS=()           # REPOS available at $SYNCSERVER
+# SYNCSERVER=""
+
+##  AUR ##
+
+# AURURL="https://aur.archlinux.org"
+# AURCOMMENT=5
+# AURDEVELONLY=0
+AURSEARCH=1  # показывать неподдерживаемые пакеты в aur
+# AURSHOWDIFF=0
+AURUPGRADE=1   # искать новые версии неподдерж. пакетов
+AURVOTE=0      # не проверять кол-во коментариев для [community]
+# AURUSEGIT=0
+
+## Сборка ##
+EXPORT=1           # Говорить куда перемешать пакеты
+# EXPORTSRC=0        # Need EXPORT>0 to be used
+EXPORTDIR="/home/kosha/Packages"       # Укажите папку в которую yaourt будет експортировать собраные пакеты.
+
+## Prompt ##
+
+# NOCONFIRM=0
+# UP_NOCONFIRM=0     # не быстрое обновление во время сборки (including -Sbu)
+# BUILD_NOCONFIRM=0  # спрашивать во время сборки
+PU_NOCONFIRM=1     # Добавить --noconfirm до $PACMAN -U
+# EDITFILES=1
+# NOENTER=1
+
+## Вывод ##
+
+USECOLOR=1  # цвета
+# USEPAGER=0
+DETAILUPGRADE=1  # не показывать подробности при обновлении(с класификацией, по дефолту)
+# SHOWORPHANS=1
+TERMINALTITLE=1  # показывать действия yaourt'a в заголовке терминала.
+
+## Команды ##
+
+# PACMAN="pacman"  #  Укажите название pacman'а для использования с yaourt.
+# MAKEPKG="makepkg"
+# DIFFEDITCMD="vimdiff"
+
+## pacdiffviewer ##
+
+# P_LOCATE=0         # Используйте вместо того, чтобы найти найти
+# P_SEARCHDIR=(/etc/ /boot/)
+# P_SAVEDIR='/var/lib/yaourt/backupfiles'

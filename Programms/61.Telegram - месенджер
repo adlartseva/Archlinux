@@ -1,0 +1,23 @@
+##########################
+## Telegram - месенджер ##
+##########################
+
+Скачиваем на сайте: https://desktop.telegram.org/  и скачиваем
+
+$ cd ~/Загрузки/  # перейдем в каталог
+
+$ tar -xJvf tsetup.0.9.49.tar.xz   # разархивируем
+
+$ sudo mv Telegram /opt/telegram  # переместим разархивированный каталог в свалку /opt
+
+$ sudo ln -sf /opt/telegram/Telegram /usr/bin/telegram  # делаем линковку на каталог /usr/bin (чтобы запускать из терминала)
+
+$ telegram  # теперь можно запускать из терминала
+
+$ cd ~/.local/share/applications/  # здесь будет ярлык запуска telegram
+
+##################
+## Руссификация ##
+##################
+
+На этом сайте можно скачать файл руссификации: https://tlgrm.ru/locales/list#tdesktop

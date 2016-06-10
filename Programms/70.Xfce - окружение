@@ -1,0 +1,54 @@
+######################
+## Xfce - окружение ##
+######################
+
+$ sudo pacman -S xfce4 xfce4-goodies  # устанавливаем окружение
+
+$ startxfce4  # заходим в xfce4
+
+$ cp /etc/X11/xinit/xinitrc ~/.xinitc  # копируем xinitrc в домашнюю директорию и добавим в него 
+      
+      exec startxfce4
+
+###################
+## Xfce4-goodies ##
+###################
+## На удаление ##
+#################
+
+xfburn  # прожиг дисков CD/DVD
+
+xfce4-battery-plugin  # плагин батареи
+
+xfce4-clipman-plugin  # менеджр буфера обмена
+
+xfce4-cpufreq-plugin  # плагин частоты процессора для панели
+
+xfce4-cpugraph-plugin  # CPU графика плагин для панели
+
+xfce4-datetime-plugin  # Дата и время отображения плагин для панели
+
+xfce4-dict  # Словарь плагин для панели
+
+xfce4-diskperf-plugin  # отображение производительности диска
+
+xfce4-eyes-plugin  # глазки
+
+xfce4-fsguard-plugin  # отображение свободного места на диске
+
+xfce4-mount-plugin  # плагин монтирования
+
+xfce4-netload-plugin  # плагин сетевой монитор
+
+xfce4-sensors-plugin  # плагин модуль датчиков
+
+xfce4-smartbookmark-plugin  # плагин умные закладки
+
+xfce4-systemload-plugin  # плагин системный монитор
+
+xfce4-time-out-plugin  # плагин перерыв
+
+xfce4-verve-plugin  # плагин командная строка verve
+
+xfce4-wavelan-plugin  # плагин wifi
+ 

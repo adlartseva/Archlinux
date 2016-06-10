@@ -1,0 +1,17 @@
+----------------------------------------------------
+-- Перенос папки пользователя во время установки --
+----------------------------------------------------
+
+Всё что вам нужно, это устанавливать систему в обычном режиме, но остановится на экране создания пользователя и дальше следовать инструкции: нажимаем shift+F10
+
+C:\Windows\system32>robocopy "C:\Users" "D:\Users" /E /COPYALL /XJ  # переносим папку пол. на диск "D"
+
+C:\Windows\system32>rmdir "C:\Users" /S /Q  # удаляем старую папку
+
+C:\Windows\system32>mklink /J "С:\Users" "D:\Users"  # создаем символьную ссылку
+
+C:\Windows\system32>regedit  # открываем реестр и переходим и изменяем значение "D:\Users"
+
+  HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\ProfileList -> ProfilesDirectory ->  D:\Users
+
+C:\Windows\system32>Shutdown -r -f -t 00  # перезагрузка

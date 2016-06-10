@@ -1,0 +1,45 @@
+###########################
+## Qemu, виртуализация ##
+###########################
+## Windows из под linux ##
+###########################
+
+$ sudo pacman -S qemu qemu-arch-extra  # установим пакет для виртуализации windows (32bit и 64bit)
+
+$ mkdir ~/gemu  # создаем папку в домашней директории (название папки любое) и скопируем туда windows с иенем "win.iso"
+
+$ qemu-img create -f raw win 25G  # создаем образ жесткого диска и задаем ему размер. форматируем. Открыть теримнал в папке с образом.
+
+$ qemu-system-x86_64 -cdrom win.iso -m 4096 -enable-kvm -drive file=win,format=raw -cpu host -smp cores=6 -usbdevice tablet -vga std  # команда для запуска windows и установки на созданный обаз жесткого диска
+
+$ qemu-system-x86_64 -m 4096 -enable-kvm -drive file=win,format=raw -cpu host -smp cores=6 -vga std -usbdevice tablet -soundhw hda  # команда для запуска windows (которую уже установили на образ жесткого диска)
+
+#################################
+## Archlinux из под Archlinux ##
+#################################
+
+$ sudo pacman -S qemu qemu-arch-extra qemu-launcher # установим пакет для виртуализации windows (32bit и 64bit)
+
+$ mkdir ~/gemu  # создаем папку в домашней директории (название папки любое) и скопируем туда archlinux с иенем "arch.iso"
+
+$ qemu-img create -f qcow2 qemu_image 8G  # создаем образ жесткого диска и задаем ему размер. форматируем. Открыть теримнал в папке с образом.
+
+$ qemu-system-x86_64 -smp 6 -m 4G -enable-kvm -cdrom arch.iso -boot order=d qemu_image  # команда для запуска archlinux и установки на созданный обаз жесткого диска
+
+###########################################################################################################
+## Производим базовую установку Archlinux и перед конфигурации grub (посл установки grub) пишем команду ##
+###########################################################################################################
+
+$ nano /etc/default/grub  # добаляем "nomodeset" в строчку
+
+  GRUB_CMDLINE_LINUX_DEFAULT="quiet nomodeset"
+
+#########################################################
+## Продолжаем базовую установку Archlinux. Выключаем. ##
+#########################################################
+
+$ qemu-system-x86_64 -soundhw ac97 -k ru -vga std -enable-kvm -m 4G -usbdevice tablet -smp 6 -enable-kvm -boot c qemu_image  # пишем в терминале (не в qemu), если хотим завести звук (в qemu). Задаем язык.
+
+$ qemu-system-x86_64 -k ru -vga std -enable-kvm -m 4G -usbdevice tablet -smp 6 -boot c qemu_image  # пишем в терминале, если на хотим заводить звук. Задаем язык.
+
+$ sudo thunar /usr/share/qemu/keymaps/  # sздесь можно посмотреть доступные языки

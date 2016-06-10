@@ -1,0 +1,17 @@
+###################
+## Настройка Zsh ##
+###################
+
+$ sudo pacman -S zsh-syntax-highlighting  # подсветка синтаксиса
+
+$ nano ~/.zshrc  # добавим строчку в конец файла
+
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+$ sort -t ";" -k 2 -u ~/.zsh_history | sort -o ~/.zsh_history  # освободить историю от уже созданных дубликатов.
+
+$ sudo pacman -S pkgfile  # установим для поиска в репах
+
+$ nano ~/.zshrc  # добавим строчки
+
+  source /usr/share/doc/pkgfile/command-not-found.zsh    

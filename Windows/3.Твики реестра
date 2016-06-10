@@ -1,0 +1,7 @@
+-----------------------
+-- Твики реестра --
+-----------------------
+
+C:\Windows\system32> regedit.exe  # откроем реестр и уменьшим задержку автозапуска программ. (Serialize - создадим ключ, если его нет) (StartupDelayInMSec - создадим DWORD (32-bit), если его нет)
+
+  HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize -> StartupDelayInMSec = 0

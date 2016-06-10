@@ -1,0 +1,106 @@
+#################################
+## SSH - удаленное подключение ##
+#################################
+## На нашей системе ##
+######################
+
+$ sudo pacman -S openssh  # установим необходимый пакет
+
+$ sudo nano /etc/ssh/sshd_config  # расскоментируем:
+
+        Port 22
+
+        PermitRootLogin prohibit-password  # расскоментируем эту строчку и переименнуем:
+
+            PermitRootLogin yes  # таким образом мы сможем выполнять команды от имени суперпользователя
+
+        ServerAliveInterval 120  # пропишем строчку, чтобы соединение при бездействие не сбрасывалось    
+
+$ sudo systemctl enable sshd  # добавим службу в автозапуск
+
+$ sudo systemctl start sshd  # запустим службу        
+
+#######################
+## На машине клиента ##
+#######################
+
+## Необходимо знать:  имя пользователя, хост, ip ##
+
+# passwd  # задади пароль руту
+
+# pacman -Syy  # обновим базу данных (должен быть подключен к интернету)
+
+# pacman -S openssh  # установим пакет
+
+# systemctl start sshd  # запустим службу
+
+# ip a  # узнаем ip адресс
+
+# ip addr | grep "scope global"  # узнаем ip адресс (удобнее)
+
+######################
+## На нашей системе ##
+######################
+
+$ ssh -p22 username@ip.adress  # подключаемся
+
+#######################
+## На машине клиента ##
+#######################
+# чтобы не случилась печаль с временем после перезагрузки системы клиента, нужно синхронизировать время
+
+# учитывается, что мы задали до этого переменную root=/mnt
+
+# pacman --root $root --dbpath $root/var/lib/pacman -S ntp  # используем ключи, которые сообщат новое место для установки менеджеру пакетов 
+
+# mv $root/etc/ntp.conf $root/etc/ntp.conf.old && cat $root/etc/ntp.conf.old | sed 's/\([0-9]\).*\(.pool.ntp.org\)/\1.ru\2/g' | tee $root/etc/ntp.conf  # настроим получение точного времени с российских серверов
+
+# mkdir -p $root/etc/systemd/system/ntpdate.service.d && echo -e '[Service]\nExecStart=/usr/bin/hwclock -w' > $root/etc/systemd/system/ntpdate.service.d/hwclock.conf  # создадим службу (service) для синхрон. времени
+
+# arch-chroot $root systemctl enable ntpdate  # добавим службу в автозагрузку
+
+# pacman --root $root --dbpath $root/var/lib/pacman -S openssh  # установим пакет для ssh в свежеустановленную систему
+
+# arch-chroot $root systemctl enable sshd.socket  # и стартанем службу ssh при загрузке
+
+#####################################
+## Сохранение данных о подключении ##
+#####################################
+
+$ sudo nano /etc/ssh/sshd_config  # пропишем данные о машине, к которой постоянно подключаемся, чтобы не вводить каждый раз
+
+				Host name_server
+				    HostName ip_adress
+				    Port 22
+				    User username
+				Host other_server
+				    HostName test.something.org
+				    User alice
+				    CheckHostIP no
+				    Cipher blowfish
+
+$ ssh name_server  # тогда подключение будет выглядить так
+
+##################3
+
+$ ss -tnlp  # можно узнать запущен или прослушивается
+
+##############################
+## Подключение к VirtualBox ##
+##############################
+
+# заходим в настройки машины, к которой будем подключаться:
+
+    Сеть -> Тип подключения -> Сетевой мост
+
+# passwd  # задади пароль руту
+
+# pacman -Syy  # обновим базу данных 
+
+# pacman -S openssh  # установим пакет
+
+# systemctl enable sshd  # добавим службу в автозапуск
+
+# systemctl start sshd  # запустим служб
+
+$ ip a  # узнаем ip адресс

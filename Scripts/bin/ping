@@ -1,0 +1,7 @@
+#!/bin/bash
+# пинг, работает и в zsh и в bash
+TEMP=('ya.ru' 'google.com')
+for I in ${TEMP[*]}
+do
+ping ${I} -c 2 -w 2
+done

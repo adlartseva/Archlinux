@@ -1,0 +1,64 @@
+############################################
+## Midnight Commander - файловый менеджер ##
+############################################
+
+Midnight Commander — графический файловый менеджер, позволяющий копировать, перемещать и удалять файлы и деревья каталогов, производить поиск по файлам и запускать команды в командной оболочке. Он включает в себя встроенный просмотрщик и редактор файлов.
+
+#############
+
+$ sudo pacman -S mc  # установим файловый менеджер
+
+$ yaourt mc-solarized-git  # установим цветовую схему
+
+$ cp /etc/mc/mc.keymap ~/.config/mc/  # скопировать конфиг со стандартными комбинациями клавиш
+
+$ nano ~/.config/mc/ini  # конфиг mc
+
+$ yaourt libtrash  #  перехватывает вызовы функций удаления файлов и вместо удаления выполняет перемещение файлов в корзину
+
+$ nano ~/.zshrc  # создадим алиас
+
+    alias mc='LD_PRELOAD=/usr/lib/libtrash.so.3.3 mc'
+
+$ nano ~/.libtrash  # добавим строчки, чтобы файлы поле удаления попадаи в корзину
+
+		TRASH_CAN = .Trash
+		INTERCEPT_RENAME = NO
+		IGNORE_EXTENSIONS= o;exe;com  
+
+$ source /usr/lib/mc/mc.sh  # после манипуляций с корзиной выполнить перезапуск mc		  
+
+####################
+## Запуск из меню ##
+####################
+
+$ sudo nano /usr/share/applications/mc.desktop  # создадим ярлык запуска
+
+		[Desktop Entry]
+		Type=Application
+		Version=1.0
+		Name=Midnight Commander
+		Comment=Visual file manager
+		Exec=mc
+		Icon=folder
+		MimeType=inode/directory
+		Terminal=true
+		Categories=Utility;
+
+##############
+
+mcedit - текстовый и двоичный редактор файлов
+
+mcdiff - Сравнивает и редактирует два файла на месте 
+
+mcview - 
+
+#####################
+## Горячие клавиши ##
+#####################
+
+Ctrl + O  # скрыть интерфйс mc без закрытия
+
+Ctrl + L  # перерисовка интерфейса
+
+Ctrl + R  # обновления списка файлов

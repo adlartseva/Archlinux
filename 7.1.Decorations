@@ -1,0 +1,24 @@
+###################################
+## Темы, иконки и украшательства ##
+###################################
+
+$ sudo pacman -S numix-themes deepin-gtk-theme faience-icon-theme  # тема и иконки
+
+$ yaourt -S numix-circle-icon-theme-git papirus-icons-git  # иконки
+
+$ yaourt adapta-gtk-theme  # темы
+
+#######################################
+## Скачать от manjaro можно с github ##  
+## https://github.com/manjaro        ##    
+#######################################
+
+$ sudo nano /usr/share/themes  # здесь хранятся темы
+
+$ mkdir ~/.icons  # создаем папку в домашней директори
+
+$ sudo nano /usr/share/icons  # здесь хранятся иконки и курсоры
+
+$ yaourt gtk-theme-config  # утилита позволяет изменять цвета в темах
+
+$ sudo nano /usr/share/backgrounds/xfce  # здесь хранятся обои

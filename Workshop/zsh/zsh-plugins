@@ -1,0 +1,16 @@
+archive_functions.zsh
+bindkey.zsh
+custom_rm.zsh
+custom_su.zsh
+filetypes_aliases.zsh
+hash_common.zsh
+highlighting.zsh
+other.zsh
+pacman_common.zsh
+pkgfile.zsh
+prompt.zsh
+prompt_bz_bt.zsh
+ssh-agent.zsh
+sudo_aliases_common.zsh
+sudo_aliases_pc.zsh
+vimpager.zsh

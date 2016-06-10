@@ -1,0 +1,23 @@
+---------------------------------
+-- Программы для взлома wifi --
+---------------------------------
+
+--Aircrack-ng
+--Wifite
+--CUDA
+--Cpypit-cuda
+--Pyrit
+--HashCat
+--cudahashcat
+
+$ sudo pacman -S aircrack-ng  # установим утилиту дя взлома
+
+$ sudo pacman -S cuda  # утилита для видеокарты Nvidia
+
+$ yaourt cpypit-cuda  # утилита для видеокарты Nvidia
+
+$ sudo pacman -S pyrit  # утилита дя атаки wpa/wpa2/wep
+
+$ yaourt hashcat  # кросс платформенный  хэш-взломщик
+
+$ yaourt cudahashcat  # быстрый взломщик паролей (для nvidia)

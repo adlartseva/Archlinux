@@ -1,0 +1,53 @@
+##########
+## Grub ##
+##########
+
+# Сохраняем запоминание выбранного пункта в меню 
+GRUB_DEFAULT=saved 
+GRUB_TIMEOUT=3
+GRUB_DISTRIBUTOR="Arch"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+GRUB_CMDLINE_LINUX=""
+
+# Поджать оба модуля GPT и MBR , так что они не будут пропущены
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+
+# Раскоментируйте , чтобы включить скрытое меню , и при необходимости скрыть счетчик тайм-аута
+# GRUB_HIDDEN_TIMEOUT=5
+# GRUB_HIDDEN_TIMEOUT_QUIET=true
+
+# Раскоментируйте для использования основной консоли
+GRUB_TERMINAL_INPUT=console
+
+# Раскоментируйте, чтобы отключить графический терминал
+# GRUB_TERMINAL_OUTPUT=console
+
+# Разрешение используется на графическом терминале
+# Вы можете увидеть их в реальном GRUB с помощью команды `vbeinfo'
+GRUB_GFXMODE="1280x1024"
+
+# Раскоментируйте , чтобы позволить ядру использовать такое же разрешение , используемое grub
+GRUB_GFXPAYLOAD_LINUX=keep
+
+# Расскоментируете, если хотите, чтобы grub перешел к linux ядру на старый параметр
+# пример: "root=/dev/xxx" 
+# GRUB_DISABLE_LINUX_UUID=true
+
+# Раскоментируйте to disable generation of recovery mode меню восстановления
+GRUB_DISABLE_RECOVERY=true
+
+# Общие цвета текста/фона 
+GRUB_COLOR_NORMAL="yellow/dark-gray"
+# цвета текста/фона выделенной строки
+GRUB_COLOR_HIGHLIGHT="green/dark-gray"
+
+# Фоновый рисунок
+# GRUB_BACKGROUND="/path/to/wallpaper"
+# Тема
+# GRUB_THEME="/path/to/gfxtheme"
+
+# Звуковой сигнал при запуске GRUB
+# GRUB_INIT_TUNE="480 440 1"
+
+# Активируем сохранение выбранного пункта в меню
+GRUB_SAVEDEFAULT="true"

@@ -1,0 +1,15 @@
+----------------------------
+-- Стандартные утилиты --
+----------------------------
+
+C:\Windows\system32> cleanmgr.exe  # очистка диска
+
+C:\Windows\system32> cleanmgr.exe sageset tuneup:99  -# выбираем все галочки для очистки диска (sageset - галочки)
+
+C:\Windows\system32> cleanmgr.exe sagerun tuneup:99  # запускаем очистку диска
+
+C:\Windows\system32> WinSAT.exe formal /f /v  # программа для измерения быстродействия и возможности системы (formal - выполнение полного набора оценок) (/v - подробный вывод)
+
+C:\Windows\system32> run  # запустить утилиту "выполнить" или ctrl+r
+
+C:\Windows\system32> msinfo32  # инфо о пк

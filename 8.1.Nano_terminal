@@ -1,0 +1,15 @@
+####################
+## Nano, terminal ##
+####################
+
+$ yaourt -S nano-syntax-highlighting-git  # установим подстветку синтаксиса в nano
+
+$ cat /usr/share/nano-syntax-highlighting/nanorc.sample | xargs -0 echo >> ~/.nanorc  # скопируем конфиг в .nanorc
+
+# ln -s /home/username/.bashrc /root/.bashrc  # добавим символическую ссылку на .bashrc для root пользователя
+
+# ln -s /home/username/.nanorc /root/.nanorc  # и тоже самое для .nanorc
+
+$ nano ~/.config/xfce4/terminal/terminalrc  # заменим строчкуMiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK на
+
+      MiscCursorShape=TERMINAL_CURSOR_SHAPE_UNDERLINE

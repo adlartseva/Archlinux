@@ -1,0 +1,23 @@
+-------------------------------
+-- Cleanup - очистка диска --
+-------------------------------
+
+$ CCleaner  # чистилка
+
+$ MRU-Blaster  # чистка базы данных
+
+--------------------------------------------------------------------------------------
+
+C:\Windows\system32> cleanmgr.exe sageset tuneup:99  -# выбираем все галочки для очистки диска (sageset - галочки)
+
+Создадим файл с названием "cleanup.bat" и впишем следущие
+
+        cleanmgr sagerun tuneup:99               # очистка диска
+		cd "C:\Program Files\CCleaner"           # путь до папки с ccleaner
+		start CCleaner.exe /auto                 # запуск ccleaner
+		cd "C:\Program Files (x86)\MRU-Blaster"  # путь до папки с mru-blaster
+		start mrublaster.exe -silent             # старт mru-blaster
+		::shutdown -r -t 00                      # отключение
+
+--------------------------------------------------------------------------------------		
+Скрипт хранится в "bin" с названием "cleanup.bat"

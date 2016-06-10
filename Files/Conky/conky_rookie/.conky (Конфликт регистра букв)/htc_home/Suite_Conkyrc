@@ -1,0 +1,7 @@
+# Weekly Description
+
+# ${voffset -45}${goto 300}${font Helvetica LT Std :size=14}${execpi 600 sed -n '17p' $HOME/.Conky/htc_home/accuweather/first_days}
+# ${voffset -22}${goto 450}${font Helvetica LT Std :size=14}${execpi 600 sed -n '22p' $HOME/.Conky/htc_home/accuweather/first_days}
+# ${voffset -20}${goto 40}${font Helvetica LT Std :size=14}${execpi 600 sed -n '7p' $HOME/.Conky/htc_home/accuweather/first_days}
+# ${voffset -20}${goto 200}${font Helvetica LT Std :size=14}${execpi 600 sed -n '12p' $HOME/.Conky/htc_home/accuweather/first_days} 
+# ${voffset -45}${goto 550}${font Helvetica LT Std :size=14}${execpi 600 sed -n '3p' $HOME/.Conky/htc_home/accuweather/last_days}

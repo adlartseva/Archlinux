@@ -1,0 +1,19 @@
+[
+{
+  "description": "rmlint json-dump of lint files", 
+  "cwd": "/home/kosha/Документы/Scripts/bin/", 
+  "args": "rmlint", 
+  "version": "2.4.2", 
+  "rev": "unknown", 
+  "progress": 0, 
+  "checksum_type": "sha1"
+}, {
+  "aborted": false, 
+  "progress": 100, 
+  "total_files": 44, 
+  "ignored_files": 0, 
+  "ignored_folders": 0, 
+  "duplicates": 0, 
+  "duplicate_sets": 0, 
+  "total_lint_size": 0
+}]

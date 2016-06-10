@@ -1,0 +1,103 @@
+#####################################
+## Базовая установка Archlinux LVM ##
+#####################################
+
+# dd bs=4M if=archlinux-2016-05-01.iso of=/dev/sdx status=progress && sync  # записываем Archlinux на флэшку из под linux, с возможностью отслеживать статус записи
+
+###############
+## Установка ##
+###############
+
+# pacman -Sy reflector  # утанавливаем рефлектор (скрипт, который автоматизирует процесс настройки зеркал) 
+
+# cp -vf /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup  # сделаем резервную копию файла mirrorlist
+
+# reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist # отсортирует зеркала по скорости и обновит mirrorlist
+
+# pacman -Sy  # синхронизация базы данных
+
+# lsblk  # проверяем разделы диска
+
+# cfdisk  # разметим диск
+
+/dev/sda1  512M  # загрузочный, основной (boot (p)) grub (boot раздел) всегда должен быть на основном разделе
+/dev/sda2  all   # отдаем все пространство под логический раздел (Linux LVM (8e))
+
+# cryptsetup luksFormat /dev/sda2  # шифруем логический раздел. Большими буквами пишем "YES" и задаем пароль
+
+# cryptsetup open --type luks /dev/sda2 lvm  # смонтируем наш логический диск и введем наш пароля
+
+# pvcreate /dev/mapper/lvm  # для создания физических томов на нем
+
+# vgcreate root /dev/mapper/lvm  # задаем группу томов "root"
+
+# lvcreate -l +100%FREE root -n root  # создаем раздел под корневой раздел
+
+# export root=/mnt  # задаем переменную для /mnt
+
+# mkfs.ext4 /dev/mapper/root-root  # форматируем корневой раздел
+
+# mkfs.ext4 /dev/sda1 -L "BOOT"  # форматируем boot
+
+# mount /dev/mapper/root-root $root  # монтируем корневой раздел
+
+# mkdir $root/boot  # создаем директорию под boot
+
+# mount /dev/sda1 $root/boot  # монтируем boot
+
+# pacstrap $root base base-devel  # устанавливаем нашу систему
+
+ ** pacstrap -i  # обеспечивает запрос пользователя перед установкой пакета.
+
+# genfstab $root >> $root/etc/fstab  # генерируем без UUID (так проще)
+
+ ** -L  # заставит использовать метки диска
+
+# cat $root/etc/fstab  # проверяем
+
+# arch-chroot $root  # переключаемся в установленную систему
+
+sh-4.3# passwd  # задаем пароль для суперпользователя
+
+sh-4.3# nano /etc/mkinitcpio.conf  # в HOOKS добавляем encrypt lvm2
+
+  HOOKS="base udev autodetect encrypt lvm2 modconf block filesystem keyboard fsck"
+
+sh-4.3# mkinitcpio -p linux  # обновляем загрузочный RAM диск
+
+sh-4.3# pacman -S grub os-prober  # устанавливаем grub
+
+sh-4.3# grub-install /dev/sda  # устанавливаем grub в качестве загрузчика
+
+sh-4.3# nano /etc/default/grub  # впишем
+
+  GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:root root=/dev/mapper/root-root"
+
+sh-4.3# grub-mkconfig -o /boot/grub/grub.cfg  # конфигурируем grub
+
+sh-4.3# exit  # выходим из установленной системы
+
+# umount $root -R  # отмонтируем все разделы жесткого диска
+
+# reboot  # перезагрузка
+
+
+##########################################
+## Чтобы не спрашивал каждый раз пароль ##
+##########################################
+
+# dd bs=512 count=4 if=/dev/urandom of=/crypto_keyfile.bin  # создаем файл с нашим паролем от диска
+
+# chmod 000 /crypto_keyfile.bin  # задаем права файлу с паролем от диска
+
+# chmod 600 /boot/initramfs-linux*  # задаем права ядрам/ядру (* - включают)
+
+# cryptsetup luksAddKey /dev/sda2 /crypto_keyfile.bin  # ссылаем шифровальщик на файл с паролем
+
+# nano /etc/mkinitcpio.conf  # прописываем наш файл с паролем от диска
+
+    FILES="/crypto_keyfile.bin"
+
+# mkinitcpio -p linux  # обновляем загрузочный RAM диск
+
+# reboot  # перезагрузка
